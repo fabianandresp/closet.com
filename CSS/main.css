@@ -1,4 +1,8 @@
 body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -7,43 +11,19 @@ body {
     align-items: center;
 }
 
-.container {
-    width: 300px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    margin-top: 20px; /* Add margin to push the container down */
-}
-
-label {
-    display: block;
-    margin-top: 10px;
-}
-
-input {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin-top: 5px;
-}
-
-button {
-    margin-top: 15px;
-    padding: 10px 15px;
-    border: none;
-    background-color: #28a745;
-    color: #fff;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #218838;
-}
-
 p {
     margin-top: 15px;
+
 }
+
+.logo {
+    margin-bottom: 5px;
+  }
+  
+  .logo img {
+    height: 20px;
+    margin: 0 auto;
+  }
 
 /* Estilos para la página 2 y siguientes */
 .navbar {
