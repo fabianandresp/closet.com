@@ -9,7 +9,7 @@ function login(event) {
 
     const user = users.find(user => user.username === username && user.password === password);
     if (user) {
-        window.location.href = 'page2.html';
+        window.location.href = 'homeCamisas.html';
     } else {
         alert('Usuario o contraseña incorrectos');
     }
@@ -24,7 +24,7 @@ function signup(event) {
     if (username && password) {
         users.push({ username, password });
         localStorage.setItem('users', JSON.stringify(users));
-        window.location.href = 'page2.html';
+        window.location.href = 'homeCamisas.html';
     } else {
         alert('Por favor, complete todos los campos');
     }

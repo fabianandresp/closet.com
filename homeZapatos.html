@@ -1,75 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zapatos</title>
-    
-
-    <script src="JavaScript/app.js" defer></script>
-    <link rel="stylesheet" href="CSS/main.css">
-    <link rel="stylesheet" href="CSS/sidebar.css">
-    <link rel="stylesheet" href="CSS/header.css">
-</head>
-<body>
-    <!--<div class="navbar">
-        <div>
-            <a href="page2.html">Camisas</a>
-            <a href="page3.html">Pantalones</a>
-            <a href="page4.html">Zapatos</a>
-        </div>
-        <button class="logout-btn" onclick="logout()">Logout</button>
-    </div>
-    <div class="content">
-        <img src="images/logo.png" alt="Logo" class="logo">
-        <div class="grid-wrapper">
-            <div class="grid-container">
-                <div class="grid-item">Zapato 1</div>
-                <div class="grid-item">Zapato 2</div>
-                <div class="grid-item">Zapato 3</div>
-                <div class="grid-item">Zapato 4</div>
-                <div class="grid-item">Zapato 5</div>
-                <div class="grid-item">Zapato 6</div>
-                <div class="grid-item">Zapato 7</div>
-                <div class="grid-item">Zapato 8</div>
-                <div class="grid-item">Zapato 9</div>
-                <div class="grid-item">Zapato 10</div>
-                <div class="grid-item">Zapato 11</div>
-                <div class="grid-item">Zapato 12</div>
-                <!-- Add more items as needed -->
-            <!--</div>
-        </div>
-    </div>-->
-
-
-    <header class="header" >
-        <div class="left-section">
-            <img class="logo" src="images/Logo.png">
-        </div>
-
-        <div class="middle-section">                
-        </div>
-
-        <div class="right-section">            
-        </div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Zapatos</title>
         
-    </header>
 
-    <nav class="sidebar">
-        <div class="sidebar-link">
-            <a href="homeCamisas.html">Camisas</a>
-        </div>
-        <div class="sidebar-link">
-            <a href="homePantalones.html">Pantalones</a>
-        </div>
-        <div class="sidebar-link">
-            <a href="homeZapatos.html">Zapatos</a>
-        </div>
+        <script src="JavaScript/app.js" defer></script>
         
-    </nav>
+        <!-- Load a font called Roboto from Google Fonts. -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <main>
+        <!--Todo los documentos de CSS-->
+        <link rel="stylesheet" href="CSS/Principal/sidebar.css">
+        <link rel="stylesheet" href="CSS/Principal/header.css">
+        <link rel="stylesheet" href="CSS/Principal/outfitHub.css">
+        <link rel="stylesheet" href="CSS/Principal/general.css">
+    <body>
         
-    </main>
-</body>
+        <header class="header" >
+            <div class="left-section">
+                <img class="logo" src="images/Logo.png">
+            </div>
+
+            <div class="middle-section">                
+            </div>
+
+            <div class="right-section">  
+                <button class="logout-btn" onclick="logout()">Logout</button>          
+            </div>
+            
+        </header>
+
+        <nav class="sidebar">
+            <div class="sidebar-link">
+                <a href="homeCamisas.html">Camisas</a>
+            </div>
+            <div class="sidebar-link">
+                <a href="homePantalones.html">Pantalones</a>
+            </div>
+            <div class="sidebar-link">
+                <a href="homeZapatos.html">Zapatos</a>
+            </div>
+            
+        </nav>
+
+        <!--Parte principal de la aplicacion-->
+        <main class="main">  
+            <p class="titulo-prenda">ZAPATOS</p>  
+            <div class="prenda-grid js-prenda-grid"></div>
+        </main>
+
+        <script type="module" src="JavaScript/outfitHub.js"></script>
+    </body>
 </html>
