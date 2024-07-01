@@ -1,0 +1,115 @@
+
+.main {
+  margin-top: 60px;
+}
+
+.prenda-grid{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+@media (max-width: 1800px) {
+  .prenda-grid{
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 1300px) {
+  .prenda-grid{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 850px) {
+  .prenda-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+}
+
+@media (max-width: 600px) {
+  .prenda-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+
+
+.prenda-container {
+  font-family: Roboto, Arial;
+  padding-bottom: 25px;
+  padding-top: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+
+  border-right: 1px solid rgb(231, 231, 231);
+  border-bottom: 1px solid rgb(231, 231, 231);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.prenda-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.prenda-image {
+  width: 100%;
+}
+
+.prenda-name {
+  height: 40px;
+  margin-bottom: 5px;
+}
+
+.prenda-spacer {
+  flex: 1;
+}
+
+.prenda-temporada {
+  font-size: 12px;
+  color: rgb(96, 96, 96);
+  margin-bottom: 12px;
+}
+
+.add-button {
+  background-color: white;
+  border-color: rgb(6, 95, 212);
+  border-style: solid;
+  border-width: 1px;
+  color: rgb(6, 95, 212);
+  padding-top: 9px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 9px;
+  border-radius: 2px;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: background-color 0.15s , color 0.15s;
+}
+
+.add-button:hover {
+  background-color: rgb(6, 95, 212);
+  color: white;
+  
+}
+
+.add-button:active {
+  opacity: 0.7;
+}
+
+.titulo-prenda {
+  padding-top: 0px;
+  padding-left: 100px;
+  font-size: 48px;
+  font-family: ROBOTO,ARIAL;
+  font-weight: bolder;
+  color: black;
+
+}
+
