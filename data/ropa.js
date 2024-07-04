@@ -1,3 +1,24 @@
+export let prendas = [];
+
+export function loadFromStorage() {
+  const storedPrendas = JSON.parse(localStorage.getItem('prendas'));
+
+  if (storedPrendas) {
+    prendas = storedPrendas;
+  }
+}
+
+
+function saveToStorage () {
+  localStorage.setItem('prendas', JSON.stringify(prendas) );
+}
+
+export function addTo (prenda){ 
+  prendas.push(prenda);
+  saveToStorage();
+}
+
+
 export function getPrenda(prendaId) {
   let matchingPrenda;
 
@@ -10,7 +31,7 @@ export function getPrenda(prendaId) {
   return matchingPrenda;
 }
 
-
+/*
 export const prendas = [
   {
     id: "1",
@@ -69,3 +90,4 @@ export const prendas = [
   tipoRopaId: 1,
   usuarioId: 1
 }];
+*/
