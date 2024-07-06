@@ -31,14 +31,15 @@ export function getPrenda(prendaId) {
   return matchingPrenda;
 }
 
-export function removeFromPrendas (prendaId) {
+export function removeFromPrendas(prendaId) {
   const newPrendas = [];
-  prendas.forEach((prendaItem) => {
-    if(prendaItem.id != prendaId){
+  
 
+  prendas.forEach((prendaItem) => {
+    console.log(`${prendaId}`);
+    console.log(prendaItem.id);
+    if (parseInt(prendaItem.id) !== parseInt(prendaId)) {
       newPrendas.push(prendaItem);
-      console.log(prendaItem.id);
-      console.log(prendaId);
     }
   });
 

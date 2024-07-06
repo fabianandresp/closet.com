@@ -159,10 +159,37 @@
   background-color: #fefefe;
   margin: 15% auto;
   padding: 20px;
-  border: 1px solid #888;
+  border: 2px solid #888;
   width: 80%;
   max-width: 300px;
+  box-shadow: 0 15px 40px;
 }
+
+.modal-content label {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  color: #262626;
+}
+
+.modal-content input, select {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.modal-content input[type="text"], select{
+  border: none;
+  border-bottom: 2px solid #262626;
+  outline: none;
+  height: 30px;
+}
+
+.modal-content input[type="text"]:focus{
+  
+}
+
+
+
 .close {
   color: #aaa;
   float: right;
@@ -177,7 +204,7 @@
 }
 
 .submit-button {
-  background-color: #04AA6D; /* Green */
+  background-color: #04AA6D; 
   border: none;
   color: white;
   padding: 13px 25px;
@@ -195,6 +222,23 @@
   opacity: 0.3;
  }
 
+ .title {
+  text-align: center;
+  padding: 50px 0 20px;
+ }
+
+ .title h1{
+  margin: 0;
+  padding: 0;
+  color: #262626;
+  text-transform: uppercase;
+  font-size: 24px;
+ }
+
+ .container {
+  
+ }
+
  .link-primary {
   color: rgb(1, 124, 182);
   cursor: pointer;
@@ -203,6 +247,8 @@
 .link-primary:hover {
   color: rgb(196, 80, 0);
 }
+
+
  
  
 
