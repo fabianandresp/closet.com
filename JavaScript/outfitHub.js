@@ -1,4 +1,4 @@
-import { loadFromStorage, addTo, prendas} from "../data/ropa.js";
+import { loadFromStorage, addTo, prendas, removeFromPrendas} from "../data/ropa.js";
 let windowVar;
 
 // Verifica si estás en la página homeCamisas.html
@@ -11,6 +11,7 @@ if (window.location.pathname.endsWith('homeCamisas.html')) {
   windowVar = 1;
 }
 
+displayClothingItems();
 
 /*
 // Función para renderizar las prendas
@@ -187,6 +188,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function displayClothingItems() {
+
+  
     const clothingArray = JSON.parse(localStorage.getItem("prendas")) || [];
     const clothingContainer = document.querySelector(".prenda-grid");
     clothingContainer.innerHTML = ``;
@@ -195,17 +198,53 @@ function displayClothingItems() {
       if (prenda.tipoRopaId === windowVar) {
         const div = document.createElement("div");
         div.classList.add("prenda-container"); 
+        div.classList.add("js-prenda-item-container"); 
+        div.classList.add(`js-prenda-item-container-${prenda.id}`); 
         div.innerHTML = `
-              <div class="prenda-image-container">
-                <img class="prenda-image" src="${prenda.image}">
-              </div>
-              <div class="prenda-name limit-text-to-2-lines">${prenda.nombre}</div>
-              <div class="prenda-temporada">${prenda.temporada}</div>
-              <div class="prenda-spacer"></div>
-              <button class="add-button">Add</button>
+          <div class="prenda-image-container 
+            ">
+            <img class="prenda-image" src="${prenda.image}">
+          </div>
+          <div class="prenda-name limit-text-to-2-lines">
+            ${prenda.nombre}
+          </div>
+          <div class="prenda-temporada">
+            ${prenda.temporada}
+          </div>
+          <div class="prenda-spacer"></div>
+          <button class="add-button">
+            Add
+          </button>
+
+          <div>
+            <span class=" link-primary js-delete-link 
+              js-delete-link-${prenda.id}" data-prenda-id="${prenda.id}">
+              Delete
+            </span>
+          </div>
         `;
         clothingContainer.appendChild(div);
       }
         
     });
+
+      document.querySelectorAll('.js-delete-link')
+    .forEach((link) => {
+      link.addEventListener('click', () => {
+        const prendaId = link.dataset.prendaId;
+        console.log(prendaId);
+        removeFromPrendas(prendaId);
+
+        console.log(prendaId);
+
+        const container = document.querySelector(
+          `.js-prenda-item-container-${prendaId}`
+        ); 
+        container.remove();
+
+        
+      });
+    
+    });
 }
+
