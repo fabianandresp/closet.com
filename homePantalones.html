@@ -52,8 +52,44 @@
         <!--Parte principal de la aplicacion-->
         <main class="main">    
             <p class="titulo-prenda">PANTALONES</p> 
+            <button id="openFormButton" class="abrir-button">
+                Agregar Prenda
+            </button>
             <div class="prenda-grid js-prenda-grid"></div>
-            
+
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <form id="clothingForm">
+                        <div  class="title"><h1>Agregar Prenda</h1></div>
+                        
+                        <label for="image">Imagen:</label>
+                        <input type="file" id="image" name="image"><br><br>
+                        
+                        
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Escriba el nombre aca..."><br><br>
+                        
+                        
+                        <label for="estado">Estado:</label>
+                        <select id="estado" name="temporada">
+                            <option value="Sucia">Sucia</option>
+                            <option value="Limpia">Limpia</option>
+                        </select><br><br>   
+                        
+
+                        <label for="temporada">Temporada:</label>
+                        <select id="temporada" name="temporada">
+                            <option value="Verano">Verano</option>
+                            <option value="Invierno">Invierno</option>
+                        </select><br><br>        
+
+                        <button type="submit" class="submit-button">Guardar</button>
+                        
+                    </form>
+                </div>
+            </div>
+        </main>
         </main>
 
         <script type="module" src="JavaScript/outfitHub.js"></script>
