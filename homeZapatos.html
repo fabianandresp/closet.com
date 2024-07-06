@@ -58,14 +58,16 @@
             <div id="myModal" class="modal">
                 <div class="modal-content">
                     <span class="close">&times;</span>
-                    <form id="clothingForm">                        
+                    <form id="clothingForm">
+                        <div  class="title"><h1>Agregar Prenda</h1></div>
+                        
                         <label for="image">Imagen:</label>
                         <input type="file" id="image" name="image"><br><br>
                         
-                        <div>
-                            <label for="nombre">Nombre:</label>
-                            <input type="text" id="nombre" name="nombre" placeholder="Escriba el nombre aca..."><br><br>
-                        </div>
+                        
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Escriba el nombre aca..."><br><br>
+                        
                         
                         <label for="estado">Estado:</label>
                         <select id="estado" name="temporada">
@@ -80,9 +82,8 @@
                             <option value="Invierno">Invierno</option>
                         </select><br><br>        
 
-                        <label for="usuarioId">Usuario ID:</label>
-                        <input type="number" id="usuarioId" name="usuarioId"><br><br>
                         <button type="submit" class="submit-button">Guardar</button>
+                        
                     </form>
                 </div>
             </div>

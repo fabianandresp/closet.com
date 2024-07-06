@@ -232,7 +232,7 @@ function displayClothingItems() {
         estado: document.getElementById("estado").value,
         temporada: document.getElementById("temporada").value,
         tipoRopaId: windowVar,
-        usuarioId: document.getElementById("usuarioId").value
+        usuarioId: 1
       };
 
       loadFromStorage();

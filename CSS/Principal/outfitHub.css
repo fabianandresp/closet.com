@@ -177,15 +177,17 @@
   width: 100%;
 }
 
-.modal-content input[type="text"], select{
+.modal-content input[type="text"],
+.modal-content input[type="file"], select{
   border: none;
   border-bottom: 2px solid #262626;
   outline: none;
   height: 30px;
 }
 
-.modal-content input[type="text"]:focus{
-  
+.modal-content input[type="text"]:focus,
+.modal-content input[type="file"]:focus, select:focus{
+  border-bottom: 2px solid #262626;
 }
 
 
