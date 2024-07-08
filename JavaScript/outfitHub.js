@@ -1,6 +1,6 @@
 import { loadFromStorage, addTo, prendas, removeFromPrendas, getPrenda } from "../data/ropa.js";
 let windowVar;
-let idUser = 0;
+let idPrenda = 0;
 
 function displayClothingItems() {
 
@@ -132,9 +132,9 @@ function displayClothingItems() {
   let prendasHTML = '';
 
   prendas.forEach(prenda => {
-    const prendaId= prenda.id;
+    const prendaId = prenda.id;
 
-    const matchingPrenda= getPrenda(prendaId);
+    const matchingPrenda = getPrenda(prendaId);
 
     if (prenda.tipoRopaId === windowVar) {
       const div = document.createElement("div");
@@ -150,6 +150,10 @@ function displayClothingItems() {
           </div>
           <div class="prenda-temporada">
             ${matchingPrenda.temporada}
+
+            <button class="btn js-corazon" data-prenda-id="${matchingPrenda.id}">
+              <i class="fas fa-heart" style="color: ${matchingPrenda.favoritos ? 'red' : 'grey'};"></i>
+            </button>
           </div>
           <div class="prenda-spacer"></div>
           <button class="add-button">
@@ -161,13 +165,47 @@ function displayClothingItems() {
               js-delete-link-${matchingPrenda.id}" data-prenda-id="${matchingPrenda.id}">
               Delete
             </span>
+            
+            <span class="link-primary-edit js-edit-link js-open-edit-form"
+              data-prenda-id="${matchingPrenda.id}" data-prenda-image="${matchingPrenda.image}" data-prenda-nombre="${matchingPrenda.nombre}" data-prenda-estado="${matchingPrenda.estado}" data-prenda-temporada="${matchingPrenda.temporada}" data-prenda-favoritos="${matchingPrenda.favoritos}">
+              Edit
+            </span>
+
+            
           </div>
+
+          
         `;
       clothingContainer.appendChild(div);
     }
 
   });
 
+   // Agregar funcionalidad a los botones de corazón
+   document.querySelectorAll(".js-corazon").forEach((button) => {
+    button.addEventListener("click", () => {
+      const icon = button.querySelector("i");
+      const prendaId = button.dataset.prendaId;
+      let prendas = JSON.parse(localStorage.getItem("prendas")) || [];
+      const prendaIndex = prendas.findIndex(prenda => prenda.id == prendaId);
+
+      if (prendaIndex !== -1) {
+        if (icon.style.color === "red") {
+          icon.style.color = "grey";
+          prendas[prendaIndex].favoritos = 0;
+        } else {
+          icon.style.color = "red";
+          prendas[prendaIndex].favoritos = 1;
+        }
+        localStorage.setItem("prendas", JSON.stringify(prendas));
+
+        
+      }
+    });
+  });
+
+
+  //Borrar item de array y manda a borrar de local storage
   document.querySelectorAll('.js-delete-link')
     .forEach((link) => {
       link.addEventListener('click', () => {
@@ -186,13 +224,112 @@ function displayClothingItems() {
 
     });
 
-    // Funcionalidad para el formulario modal
+
+  // Funcionalidad para el formulario modal (EDIT)
+  document.querySelectorAll(".js-open-edit-form")
+    .forEach((link) => {
+      link.addEventListener('click', () => {
+        modal.style.display = "block";
+        document.querySelector(".titleText").innerText = "Editar prenda";
+
+        const prendaId = link.dataset.prendaId;
+        const prendaImage = link.dataset.prendaImage;
+        const prendaNombre = link.dataset.prendaNombre;
+        const prendaEstado = link.dataset.prendaEstado;
+        const prendaTemporada = link.dataset.prendaTemporada;
+        const prendaFavoritos = link.dataset.prendaFavoritos;
+
+        // Rellenar los campos del formulario con los datos actuales
+        document.getElementById("nombre").value = prendaNombre;
+        document.getElementById("estado").value = prendaEstado;
+        document.getElementById("temporada").value = prendaTemporada;
+
+        const formEdit = document.getElementById("clothingForm");
+
+        formEdit.onsubmit = function (event) {
+          event.preventDefault();
+
+          removeFromPrendas(prendaId);
+            //console.log(prendaId);
+            const container = document.querySelector(
+              `.js-prenda-item-container-${prendaId}`
+            );
+
+          const fileInput = document.getElementById("image");
+          const file = fileInput.files[0];
+          const reader = new FileReader();
+
+          reader.onloadend = function () {
+            // Obtener las prendas desde localStorage
+            let prendas = JSON.parse(localStorage.getItem("prendas")) || [];
+
+            const formData = {
+              id: prendaId,
+              image: reader.result || prendaImage,
+              nombre: document.getElementById("nombre").value || prendaNombre,
+              estado: document.getElementById("estado").value || prendaEstado,
+              temporada: document.getElementById("temporada").value || prendaTemporada,
+              tipoRopaId: windowVar,
+              usuarioId: 1,
+              favoritos: prendaFavoritos
+            };
+
+            
+
+
+            if (container) {
+              container.remove();
+            }
+
+            loadFromStorage();
+            addTo(formData);
+
+            modal.style.display = "none";
+            formEdit.reset();
+            displayClothingItems();
+          }
+
+          if (file) {
+            reader.readAsDataURL(file);
+          } else {
+            const formData = {
+              id: prendaId,
+              image: prendaImage,
+              nombre: document.getElementById("nombre").value || prendaNombre,
+              estado: document.getElementById("estado").value || prendaEstado,
+              temporada: document.getElementById("temporada").value || prendaTemporada,
+              tipoRopaId: windowVar,
+              usuarioId: 1
+            };
+
+
+            loadFromStorage();
+            addTo(formData);
+
+
+            modal.style.display = "none";
+            formEdit.reset();
+            displayClothingItems();
+          }
+        }
+      });
+    });
+
+
+
+
+
+
+  // Funcionalidad para el formulario modal
   const modal = document.getElementById("myModal");
   const btn = document.getElementById("openFormButton");
   const span = document.getElementsByClassName("close")[0];
   const form = document.getElementById("clothingForm");
 
+
+
   btn.onclick = function () {
+    document.querySelector(".titleText").innerText = "Agregar Prenda";
     modal.style.display = "block";
   }
 
@@ -221,18 +358,19 @@ function displayClothingItems() {
       let lastId = prendas.length > 0 ? prendas[prendas.length - 1].id : 0;
 
 
-      idUser = lastId + idUser + 1;
-      console.log(idUser);
+      idPrenda = lastId + idPrenda + 1;
+      console.log(idPrenda);
 
 
       const formData = {
-        id: idUser,
+        id: idPrenda,
         image: reader.result,
         nombre: document.getElementById("nombre").value,
         estado: document.getElementById("estado").value,
         temporada: document.getElementById("temporada").value,
         tipoRopaId: windowVar,
-        usuarioId: 1
+        usuarioId: 1,
+        favoritos: 0
       };
 
       loadFromStorage();
@@ -249,6 +387,9 @@ function displayClothingItems() {
       alert("Por favor, selecciona una imagen.");
     }
   }
+
+
+
 
   document.addEventListener("DOMContentLoaded", () => {
     displayClothingItems();
