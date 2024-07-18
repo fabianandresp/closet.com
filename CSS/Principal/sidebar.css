@@ -2,15 +2,27 @@
   position: fixed;
   bottom: 0;
   left: 0;
-  top: 55px;
-  background-color: pink;
-  width: 72px;
+  top: 100px;
+  background-color: rgb(159, 159, 159);
+  width: 130px;
   z-index: 200px;
-  padding-top: 5px;
+  padding-top: 0px;
+
+}
+
+.sidebar-button {
+  font-size: large;
+  border: none;
+  width: 100px;
+  height: 50px;
+
 }
 
 .sidebar-link {
-  height: 74px;
+  text-decoration: none;
+  font-size: large;
+  border: 10px;
+  height: 90px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,6 +32,8 @@
 
 .sidebar-link:hover {
   background-color: rgb(238, 238, 238);
+  text-decoration: none;
+  font-size: large;
 }
 
 .sidebar-link img {
