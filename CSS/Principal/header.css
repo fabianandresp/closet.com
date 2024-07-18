@@ -1,5 +1,5 @@
 .header {
-  height: 55px;
+  height: 100px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -16,15 +16,15 @@
 }
 
 .left-section {
-  
+
   display: flex;
   align-items: center;
- 
+
 }
 
 .logo {
-  height: 67px;
-  
+  height: 100px;
+
 }
 
 .middle-section {
@@ -34,8 +34,8 @@
   max-width: 500px;
   display: flex;
   align-items: center;
- }
- 
+}
+
 .right-section {
   width: 180px;
   margin-right: 20px;
@@ -45,3 +45,11 @@
   flex-shrink: 0;
 }
 
+.logout-btn {
+  width: 50px;
+  height: 30px;
+  border: none;
+  background-color: rgb(4, 204, 204);
+  font-size: x-large;
+  cursor: pointer;
+}
