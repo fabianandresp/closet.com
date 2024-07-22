@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pantalones</title>
+    <title>OutfitHub</title>
 
     <!--Font script-->
     <script src="https://kit.fontawesome.com/59e21f627f.js" crossorigin="anonymous"></script>
@@ -17,19 +17,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!--Todo los documentos de CSS-->
-    <link rel="stylesheet" href="CSS/Principal/sidebar.css">
     <link rel="stylesheet" href="CSS/Principal/header.css">
     <link rel="stylesheet" href="CSS/Principal/outfitHub.css">
     <link rel="stylesheet" href="CSS/Principal/general.css">
-</head>
 
 <body>
-
-
 
     <header class="header">
         <div class="left-section">
             <img class="logo" src="images/Logo.png">
+            <a class="menu-botones-medio" boton-inicio>Inicio</a>
+            <a class="menu-botones-medio" boton-buscar>Buscar</a>
         </div>
 
         <div class="middle-section">
@@ -41,31 +39,16 @@
 
     </header>
 
-    <nav class="sidebar">
-        <div class="sidebar-link">
-            <a href="homeCamisas.html">Camisas</a>
-        </div>
-        <div class="sidebar-link">
-            <a href="homePantalones.html">Pantalones</a>
-        </div>
-        <div class="sidebar-link">
-            <a href="homeZapatos.html">Zapatos</a>
-        </div>
-
-    </nav>
-
     <!--Parte principal de la aplicacion-->
     <main class="main">
-        <p class="titulo-prenda">PANTALONES</p>
+        <p class="titulo-prenda">Prendas disponibles</p>
 
-        <div class="buscador">
-            <input class="barra-busqueda" class="js-input-busqueda">
-            <button class="boton-busqueda" onclick="buscarItems();">Buscar</button>
+        <div class="botonesAgregarBuscar">
+            <button id="openFormButton" class="boton-agregar">
+                Agregar Prenda
+            </button>
         </div>
 
-        <button id="openFormButton" class="abrir-button">
-            Agregar Prenda
-        </button>
         <div class="prenda-grid js-prenda-grid"></div>
 
         <div id="myModal" class="modal">
