@@ -8,7 +8,7 @@
   top: 0;
   left: 0;
   right: 0;
-  background-color: rgb(4, 204, 204);
+  background-color: rgb(166, 206, 252);
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-bottom-color: rgb(226, 226, 226);
@@ -23,7 +23,7 @@
 }
 
 .logo {
-  height: 100px;
+  height: 140px;
 
 }
 
@@ -34,6 +34,7 @@
   max-width: 500px;
   display: flex;
   align-items: center;
+
 }
 
 .right-section {
@@ -46,10 +47,36 @@
 }
 
 .logout-btn {
-  width: 50px;
-  height: 30px;
-  border: none;
-  background-color: rgb(4, 204, 204);
+  width: 100px;
+  height: 50px;
+  border: 10px;
+  background-color: rgb(166, 206, 252);
   font-size: x-large;
+  cursor: pointer;
+  font-weight: 500;
+
+}
+
+
+.menu-botones-medio {
+  width: 100px;
+  height: 100px;
+  border: none;
+  font-size: x-large;
+  background-color: rgb(166, 206, 252);
+  color: rgb(81, 81, 81);
+  font-weight: 600;
+  cursor: pointer;
+
+}
+
+.menu-botones-medio-onclick {
+  width: 100px;
+  height: 100px;
+  border: none;
+  font-size: x-large;
+  background-color: rgb(81, 81, 81);
+  color: rgb(166, 206, 252);
+  font-weight: 600;
   cursor: pointer;
 }
