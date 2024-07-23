@@ -8,12 +8,14 @@ body {
   font-family: Roboto, Arial;
   margin: 0;
   padding-top: 40px;
-  padding-left: 150px;
+  padding-left: 20px;
   padding-right: 15px;
   background-color: rgb(248, 248, 248)
 }
 
-.buscador {}
+.botonesAgregarBuscar {
+  padding-left: 50px;
+}
 
 .barra-busqueda {
   width: 200px;
@@ -23,12 +25,13 @@ body {
   border-radius: 5px;
 }
 
-.boton-busqueda {
+
+.boton-agregar {
   margin: 10px;
-  width: 100px;
+  width: 150px;
   height: 35px;
   border: none;
-  background-color: rgb(58, 66, 67);
+  background-color: rgb(39, 133, 29);
   color: white;
   border-radius: 40px;
   font-size: large;

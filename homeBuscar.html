@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OutfitHub</title>
+
+    <!--Font script-->
+    <script src="https://kit.fontawesome.com/59e21f627f.js" crossorigin="anonymous"></script>
+
+    <script src="JavaScript/app.js" defer></script>
+
+    <!-- Load a font called Roboto from Google Fonts. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!--Todo los documentos de CSS-->
+    <link rel="stylesheet" href="CSS/Principal/header.css">
+    <link rel="stylesheet" href="CSS/Principal/outfitHub.css">
+    <link rel="stylesheet" href="CSS/Principal/general.css">
+
+<body>
+
+    <header class="header">
+        <div class="left-section">
+            <img class="logo" src="images/Logo.png">
+            <a class="menu-botones-medio" boton-inicio>Inicio</a>
+            <a class="menu-botones-medio" boton-buscar>Buscar</a>
+        </div>
+
+        <div class="middle-section">
+        </div>
+
+        <div class="right-section">
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+
+    </header>
+
+    <!--Parte principal de la aplicacion-->
+    <main class="main">
+        <p class="titulo-prenda">Buscar prendas</p>
+
+        <div class="botonesAgregarBuscar">
+            <input class="barra-busqueda" data-search>
+            <button id="openFormButton" class="boton-agregar">
+                Agregar Prenda
+            </button>
+        </div>
+
+
+        <div class="prenda-grid js-prenda-grid"></div>
+
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form id="clothingForm">
+                    <div class="title">
+                        <h1 class="titleText">Agregar Prenda</h1>
+                    </div>
+
+                    <label for="image">Imagen:</label>
+                    <input type="file" id="image" name="image"><br><br>
+
+
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Escriba el nombre aca..."><br><br>
+
+
+                    <label for="estado">Estado:</label>
+                    <select id="estado" name="temporada">
+                        <option value="Sucia">Limpia</option>
+                        <option value="Limpia">Sucia</option>
+                    </select><br><br>
+
+
+                    <label for="temporada">Temporada:</label>
+                    <select id="temporada" name="temporada">
+                        <option value="Verano">Verano</option>
+                        <option value="Invierno">Invierno</option>
+                    </select><br><br>
+
+                    <button type="submit" class="submit-button">Guardar</button>
+
+                </form>
+            </div>
+        </div>
+    </main>
+    </main>
+
+    <script type="module" src="JavaScript/outfitHub.js"></script>
+</body>
+
+</html>
