@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes</title>
+
+    <!--Font script-->
+    <script src="https://kit.fontawesome.com/59e21f627f.js" crossorigin="anonymous"></script>
+
+    <script src="JavaScript/app.js" defer></script>
+
+    <!-- Load a font called Roboto from Google Fonts. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!--Todos los documentos de CSS-->
+    <link rel="stylesheet" href="CSS/Principal/header.css">
+    <link rel="stylesheet" href="CSS/Principal/outfitHub.css">
+    <link rel="stylesheet" href="CSS/Principal/general.css">
+    <link rel="stylesheet" href="CSS/reportes.css">
+
+</head>
+<body>
+    <header class="header">
+        <div class="left-section">
+            <img class="logo" src="images/Logo.png">
+            <a class="menu-botones-medio" boton-inicio>Inicio</a>
+            <a class="menu-botones-medio" boton-buscar>Buscar</a>
+            <a class="menu-botones-medio" boton-buscar>Reportes</a>
+        </div>
+        <div class="middle-section"></div>
+        <div class="right-section">
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </header>
+
+    <main class="main reportes-section">
+        <p class="titulo-prenda">Lista de Reportes</p>
+        
+        <div class="reportes">
+            <table class="reportes-tabla">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tipo</th>
+                        <th>Descripción</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody id="reportes-list">
+                    <!-- Los reportes se mostrarán aquí -->
+                </tbody>
+            </table>
+        </div>
+        <script src="JavaScript/reportes.js" defer></script>
+    </main>
+</body>
+</html>

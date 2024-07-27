@@ -9,6 +9,8 @@ function login(event) {
 
     const user = users.find(user => user.username === username && user.password === password);
     if (user) {
+        limpiarReportes();
+        agregarReporte('Inicio de sesion exitoso para el usuario ' + username, 'Inicio de sesion - Exitoso');
         window.location.href = 'home.html';
     } else {
         alert('Usuario o contraseña incorrectos');
@@ -24,6 +26,8 @@ function signup(event) {
     if (username && password) {
         users.push({ username, password });
         localStorage.setItem('users', JSON.stringify(users));
+        limpiarReportes();
+        agregarReporte('Registro de usuario exitoso para el usuario ' + username, 'Registro de usuario - Exitoso');
         window.location.href = 'home.html';
     } else {
         alert('Por favor, complete todos los campos');
@@ -32,6 +36,7 @@ function signup(event) {
 
 // Función de logout
 function logout() {
+    limpiarReportes();
     window.location.href = 'index.html';
 }
 
@@ -60,3 +65,17 @@ document.addEventListener('DOMContentLoaded', () => {
         signupForm.addEventListener('submit', signup);
     }
 });
+
+/*FUNCION PARA AGREGAR REPORTES*/
+function agregarReporte(mensaje, tipo) {
+    let reportes = JSON.parse(localStorage.getItem('reportes')) || [];
+    let id = reportes.length + 1;
+    let fecha = new Date().toLocaleString();
+    reportes.push({ id, tipo, mensaje, fecha });
+    localStorage.setItem('reportes', JSON.stringify(reportes));
+}
+
+/*FUNCION PARA LIMPIAR REPORTES*/
+function limpiarReportes() {
+    localStorage.removeItem('reportes');
+}

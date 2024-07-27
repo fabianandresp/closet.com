@@ -301,9 +301,11 @@ let isVisibleInicio = false;
 document.querySelector("[boton-inicio]").addEventListener("click", e => {
   if (!isVisibleInicio) {
     document.querySelector("[boton-inicio]").classList.add("menu-botones-medio-onclick");
+    agregarReporte('Cambio de pestaña a inicio','Cambio de pestaña');
     location.href = "/home.html";
   } else {
     document.querySelector("[boton-inicio]").classList.add("menu-botones-medio");
+    agregarReporte('Cambio de pestaña a inicio','Cambio de pestaña');
     location.href = "/home.html";
   }
 })
@@ -313,9 +315,11 @@ let isVisibleBuscar = false;
 document.querySelector("[boton-buscar]").addEventListener("click", e => {
   if (!isVisibleBuscar) {
     document.querySelector("[boton-buscar]").classList.add("menu-botones-medio-onclick");
+    agregarReporte('Cambio de pestaña a buscar','Cambio de pestaña');
     location.href = "/homeBuscar.html";
   } else {
     document.querySelector("[boton-buscar]").classList.add("menu-botones-medio");
+    agregarReporte('Cambio de pestaña a buscar','Cambio de pestaña');
     location.href = "/homeBuscar.html";
   }
 })
@@ -323,3 +327,25 @@ document.querySelector("[boton-buscar]").addEventListener("click", e => {
 loadFromStorage();
 displayClothingItems(listaPrendasOriginal);
 
+/*IR A LA PAGINA REPORTES*/
+let isVisibleReportes = false;
+document.querySelector("[boton-reportes]").addEventListener("click", e => {
+  if (!isVisibleBuscar) {
+    document.querySelector("[boton-reportes]").classList.add("menu-botones-medio-onclick");
+    agregarReporte('Cambio de pestaña a reportes','Cambio de pestaña');
+    location.href = "/homeReportes.html";
+  } else {
+    document.querySelector("[boton-reportes]").classList.add("menu-botones-medio");
+    agregarReporte('Cambio de pestaña a reportes','Cambio de pestaña');
+    location.href = "/homeReportes.html";
+  }
+})
+
+/*FUNCION PARA AGREGAR REPORTES*/
+function agregarReporte(mensaje, tipo) {
+  let reportes = JSON.parse(localStorage.getItem('reportes')) || [];
+  let id = reportes.length + 1;
+  let fecha = new Date().toLocaleString();
+  reportes.push({ id, tipo, mensaje, fecha });
+  localStorage.setItem('reportes', JSON.stringify(reportes));
+}
