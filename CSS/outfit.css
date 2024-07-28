@@ -1,0 +1,62 @@
+/* outfit.css */
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f0f0;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.outfit-container {
+    max-width: 100%;
+    overflow-x: auto; /* Habilita el desplazamiento horizontal */
+    white-space: nowrap; /* Evita el salto de línea */
+}
+
+.outfit-section {
+    margin: 10px 0;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    width: 90%; /* Ajusta el ancho según sea necesario */
+    margin: 0 auto; /* Centra el contenido horizontalmente */
+    overflow: hidden; /* Oculta cualquier contenido adicional */
+}
+
+.outfit-section h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.outfit-items {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto; /* Permite el desplazamiento horizontal */
+    padding: 10px 0; /* Espaciado interior para separar las imágenes */
+}
+
+.outfit-item {
+    flex: 0 0 auto; /* Establece el tamaño flexible */
+    width: 200px; /* Ancho fijo para cada item */
+    height: 200px; /* Altura fija para cada item */
+    overflow: hidden; /* Oculta cualquier contenido adicional */
+    position: relative; /* Asegura que los elementos sean relativos para la superposición */
+    border: 1px solid #ccc; /* Borde para cada elemento */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+.outfit-item img {
+    max-width: 100%; /* Ajusta el ancho máximo de la imagen */
+    height: auto; /* Ajusta la altura automáticamente */
+    display: block; /* Asegura que la imagen se muestre como un bloque */
+    object-fit: cover; /* Ajusta la imagen para cubrir el contenedor */
+    width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
+    height: 100%; /* Asegura que la imagen ocupe toda la altura del contenedor */
+}

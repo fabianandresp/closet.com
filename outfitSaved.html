@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Outfit Guardado</title>
+  <link rel="stylesheet" href="CSS/outfit.css">
+</head>
+<body>
+  <h1>Outfit Guardado</h1>
+  <div class="outfit-container">
+    <div class="outfit-section" id="camisas-section">
+      <h2>Camisas</h2>
+      <div class="outfit-items" id="camisas-items"></div>
+    </div>
+    <!-- Puedes agregar secciones para pantalones y zapatos según sea necesario -->
+  </div>
+  
+  <!-- JavaScript -->
+  <script src="JavaScript/ropa.js"></script> <!-- Asegúrate de incluir el script de ropa.js -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Recuperar el objeto outfitSaved desde localStorage
+      let outfitSaved = JSON.parse(localStorage.getItem("outfitSaved")) || {
+        camisas: [],
+        pantalones: [],
+        zapatos: []
+      };
+
+      const camisasContainer = document.getElementById("camisas-items");
+      // Iterar sobre las camisas guardadas y mostrarlas
+      outfitSaved.camisas.forEach(prenda => {
+        const div = document.createElement("div");
+
+        // Crear elemento de imagen
+        const img = document.createElement("img");
+        img.src = prenda.image; // Asegúrate de que "image" sea el nombre correcto del campo en tu objeto prenda
+        img.alt = prenda.nombre; // Asegúrate de que "nombre" sea el nombre correcto del campo en tu objeto prenda
+        img.classList.add("prenda-image"); // Clase para estilo de imagen si es necesario
+
+        // Crear elemento de texto para mostrar el nombre
+        const nombrePrenda = document.createElement("p");
+        nombrePrenda.textContent = prenda.nombre;
+
+        // Agregar imagen y nombre al contenedor de camisas
+        div.appendChild(img);
+        div.appendChild(nombrePrenda);
+        
+        camisasContainer.appendChild(div);
+      });
+    });
+  </script>
+</body>
+</html>
