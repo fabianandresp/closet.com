@@ -381,3 +381,6 @@ updateHeartIcons();
 loadFromStorage();
 displayClothingItems(listaPrendasOriginal);
 
+function nose () {
+  
+}
