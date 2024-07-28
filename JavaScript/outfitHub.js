@@ -19,6 +19,39 @@ if (inputBuscar != null) {
     displayClothingItems(listaPrendasBusqueda);
   })
 }
+function ropaTipoId(idOrName) {
+  switch (idOrName) {
+    case 1:
+    case "1":
+    case "Zapatos":
+      return "Zapatos";
+    case 2:
+    case "2":
+    case "Prenda inferior":
+      return "Prenda inferior";
+    case 3:
+    case "3":
+    case "Prenda superior":
+    default:
+      return "Prenda superior";
+  }
+}
+
+function updateHeartIcons() {
+  document.querySelectorAll('.js-corazon').forEach(button => {
+    const prendaId = button.dataset.prendaId;
+    const prenda = listaPrendasOriginal.find(prenda => prenda.id == prendaId);
+
+    if (prenda) {
+      const icon = button.querySelector('i');
+      if (prenda.favoritos === 1) {
+        icon.style.color = 'red';
+      } else if (prenda.favoritos === 0){
+        icon.style.color = 'grey';
+      }
+    }
+  });
+}
 
 
 function displayClothingItems(listaPrendas) {
@@ -45,6 +78,11 @@ function displayClothingItems(listaPrendas) {
           <div class="prenda-name limit-text-to-2-lines">
             ${prenda.nombre}
           </div>
+
+          <div class="prenda-tipo limit-text-to-2-lines">
+            ${ropaTipoId(prenda.tipoRopaId)}
+          </div>
+
           <div class="prenda-temporada">
             ${prenda.temporada}
 
@@ -60,12 +98,12 @@ function displayClothingItems(listaPrendas) {
           <div>
             <span class=" link-primary js-delete-link 
               js-delete-link-${prenda.id}" data-prenda-id="${prenda.id}">
-              Delete
+              Borrar
             </span>
             
             <span class="link-primary-edit js-edit-link js-open-edit-form"
-              data-prenda-id="${prenda.id}" data-prenda-image="${prenda.image}" data-prenda-nombre="${prenda.nombre}" data-prenda-estado="${prenda.estado}" data-prenda-temporada="${prenda.temporada}" data-prenda-favoritos="${prenda.favoritos}">
-              Edit
+              data-prenda-id="${prenda.id}" data-prenda-image="${prenda.image}" data-prenda-nombre="${prenda.nombre}" data-prenda-estado="${prenda.estado}" data-prenda-temporada="${prenda.temporada}" data-prenda-favoritos="${prenda.favoritos}", data-prenda-tipo="${prenda.tipoRopaId}">
+              Editar
             </span>
 
             
@@ -78,143 +116,161 @@ function displayClothingItems(listaPrendas) {
 
   });
 
+  
+
   // Agregar funcionalidad a los botones de corazón
   document.querySelectorAll(".js-corazon").forEach((button) => {
     button.addEventListener("click", () => {
       const icon = button.querySelector("i");
       const prendaId = button.dataset.prendaId;
-      //let prendas = JSON.parse(localStorage.getItem("prendas")) || [];
-      const prendaIndex = listaPrendas.findIndex(prenda => prenda.id == prendaId);
+      const prendaIndex = listaPrendasOriginal.findIndex(prenda => prenda.id == prendaId);
 
       if (prendaIndex !== -1) {
         if (icon.style.color === "red") {
           icon.style.color = "grey";
-          listaPrendas[prendaIndex].favoritos = 0;
+          listaPrendasOriginal[prendaIndex].favoritos = 0;
         } else {
           icon.style.color = "red";
-          listaPrendas[prendaIndex].favoritos = 1;
+          listaPrendasOriginal[prendaIndex].favoritos = 1;
         }
-        localStorage.setItem("prendas", JSON.stringify(prendas));
-
-
+        localStorage.setItem("prendas", JSON.stringify(listaPrendasOriginal));
+        displayClothingItems(listaPrendasOriginal);  // Refrescar la lista de prendas
       }
     });
   });
 
 
-  //Borrar item de array y manda a borrar de local storage
-  document.querySelectorAll('.js-delete-link')
-    .forEach((link) => {
-      link.addEventListener('click', () => {
-        const prendaId = link.dataset.prendaId;
-        removeFromPrendas(prendaId);
-        //console.log(prendaId);
-        const container = document.querySelector(
-          `.js-prenda-item-container-${prendaId}`
-        );
-        if (container) {
-          container.remove();
-        }
-
-
-      });
-
+  // Agregar funcionalidad a los enlaces de eliminación
+  document.querySelectorAll('.js-delete-link').forEach((link) => {
+    link.addEventListener('click', () => {
+      const prendaId = link.dataset.prendaId;
+  
+      // Llamar a la función para eliminar la prenda del local storage
+      removeFromPrendas(prendaId);
+  
+      // Eliminar la prenda de la listaPrendasOriginal
+      const index = listaPrendasOriginal.findIndex(prenda => prenda.id == prendaId);
+      if (index !== -1) {
+        listaPrendasOriginal.splice(index, 1);
+      }
+  
+      // Encontrar y eliminar el contenedor de la prenda en la interfaz
+      const container = document.querySelector(`.js-prenda-item-container-${prendaId}`);
+      if (container) {
+        container.remove();
+      }
     });
-
+  });
 
   // Funcionalidad para el formulario modal (EDIT)
-  document.querySelectorAll(".js-open-edit-form")
-    .forEach((link) => {
-      link.addEventListener('click', () => {
-        modal.style.display = "block";
-        document.querySelector(".titleText").innerText = "Editar prenda";
 
-        const prendaId = link.dataset.prendaId;
-        const prendaImage = link.dataset.prendaImage;
-        const prendaNombre = link.dataset.prendaNombre;
-        const prendaEstado = link.dataset.prendaEstado;
-        const prendaTemporada = link.dataset.prendaTemporada;
-        const prendaFavoritos = link.dataset.prendaFavoritos;
+  document.querySelectorAll(".js-open-edit-form").forEach((link) => {
+    link.addEventListener('click', () => {
+      modal.style.display = "block";
+      document.querySelector(".titleText").innerText = "Editar prenda";
 
-        // Rellenar los campos del formulario con los datos actuales
-        document.getElementById("nombre").value = prendaNombre;
-        document.getElementById("estado").value = prendaEstado;
-        document.getElementById("temporada").value = prendaTemporada;
+      const prendaId = link.dataset.prendaId;
+      const prendaImage = link.dataset.prendaImage;
+      const prendaNombre = link.dataset.prendaNombre;
+      const prendaEstado = link.dataset.prendaEstado;
+      const prendaTemporada = link.dataset.prendaTemporada;
+      const prendaFavoritos = link.dataset.prendaFavoritos;
+      const prendaTipo = link.dataset.prendaTipo;
 
-        const formEdit = document.getElementById("clothingForm");
+      console.log(prendaFavoritos);
+      
 
-        formEdit.onsubmit = function (event) {
-          event.preventDefault();
+      // Rellenar los campos del formulario con los datos actuales
+      document.getElementById("nombre").value = prendaNombre;
+      document.getElementById("estado").value = prendaEstado;
+      document.getElementById("temporada").value = prendaTemporada;
+      document.getElementById("tipo").value = prendaTipo;
 
-          removeFromPrendas(prendaId);
-          //console.log(prendaId);
-          const container = document.querySelector(
-            `.js-prenda-item-container-${prendaId}`
-          );
+      const formEdit = document.getElementById("clothingForm");
 
-          const fileInput = document.getElementById("image");
-          const file = fileInput.files[0];
-          const reader = new FileReader();
+      formEdit.onsubmit = function (event) {
+        event.preventDefault();
 
-          reader.onloadend = function () {
-            // Obtener las prendas desde localStorage
-            //let prendas = JSON.parse(localStorage.getItem("prendas")) || [];
+        removeFromPrendas(prendaId);
+        const container = document.querySelector(`.js-prenda-item-container-${prendaId}`);
 
-            const formData = {
-              id: prendaId,
-              image: reader.result || prendaImage,
-              nombre: document.getElementById("nombre").value || prendaNombre,
-              estado: document.getElementById("estado").value || prendaEstado,
-              temporada: document.getElementById("temporada").value || prendaTemporada,
-              tipoRopaId: windowVar,
-              usuarioId: 1,
-              favoritos: prendaFavoritos
-            };
+        const fileInput = document.getElementById("image");
+        const file = fileInput.files[0];
+        const reader = new FileReader();
 
+        reader.onloadend = function () {
+          const formData = {
+            id: prendaId,
+            image: reader.result || prendaImage,
+            nombre: document.getElementById("nombre").value || prendaNombre,
+            estado: document.getElementById("estado").value || prendaEstado,
+            temporada: document.getElementById("temporada").value || prendaTemporada,
+            tipoRopaId: document.getElementById("tipo").value || prendaTipo,
+            usuarioId: 1,
+            favoritos: prendaFavoritos // Mantener el estado de favoritos original
+          };
+          console.log(prendaFavoritos);
 
-
-
-            if (container) {
-              container.remove();
-            }
-
-            loadFromStorage();
-            addTo(formData);
-
-            modal.style.display = "none";
-            formEdit.reset();
-            displayClothingItems();
+          if (container) {
+            container.remove();
           }
 
-          if (file) {
-            reader.readAsDataURL(file);
+          addTo(formData);
+
+          modal.style.display = "none";
+          formEdit.reset();
+
+          // Actualiza listaPrendasOriginal y vuelve a mostrar las prendas
+          const index = listaPrendasOriginal.findIndex(prenda => prenda.id == prendaId);
+          if (index !== -1) {
+            listaPrendasOriginal[index] = formData;
           } else {
-            const formData = {
-              id: prendaId,
-              image: prendaImage,
-              nombre: document.getElementById("nombre").value || prendaNombre,
-              estado: document.getElementById("estado").value || prendaEstado,
-              temporada: document.getElementById("temporada").value || prendaTemporada,
-              tipoRopaId: windowVar,
-              usuarioId: 1
-            };
-
-
-            loadFromStorage();
-            addTo(formData);
-
-
-            modal.style.display = "none";
-            formEdit.reset();
-            displayClothingItems();
+            listaPrendasOriginal.push(formData);
           }
+          displayClothingItems(listaPrendasOriginal);
         }
-      });
+
+        if (file) {
+          reader.readAsDataURL(file);
+        } else {
+          const formData = {
+            id: prendaId,
+            image: prendaImage,
+            nombre: document.getElementById("nombre").value || prendaNombre,
+            estado: document.getElementById("estado").value || prendaEstado,
+            temporada: document.getElementById("temporada").value || prendaTemporada,
+            tipoRopaId: document.getElementById("tipo").value || prendaTipo,
+            usuarioId: 1,
+            favoritos: prendaFavoritos // Mantener el estado de favoritos original
+          };
+
+          if (container) {
+            container.remove();
+          }
+
+          addTo(formData);
+
+          modal.style.display = "none";
+          formEdit.reset();
+
+          // Actualiza listaPrendasOriginal y vuelve a mostrar las prendas
+          const index = listaPrendasOriginal.findIndex(prenda => prenda.id == prendaId);
+          if (index !== -1) {
+            listaPrendasOriginal[index] = formData;
+          } else {
+            listaPrendasOriginal.push(formData);
+          }
+          
+          displayClothingItems(listaPrendasOriginal);
+          updateHeartIcons();
+        }
+      }
     });
+  });
 
+  
 
-
-
+  
 
 
   // Funcionalidad para el formulario modal
@@ -265,17 +321,19 @@ function displayClothingItems(listaPrendas) {
         nombre: document.getElementById("nombre").value,
         estado: document.getElementById("estado").value,
         temporada: document.getElementById("temporada").value,
-        tipoRopaId: windowVar,
+        tipoRopaId: document.getElementById("tipo").value,
         usuarioId: 1,
         favoritos: 0
       };
 
-      loadFromStorage();
       addTo(formData);
 
       modal.style.display = "none";
       form.reset();
-      displayClothingItems();
+
+      // Actualiza listaPrendasOriginal y vuelve a mostrar las prendas
+      listaPrendasOriginal.push(formData);
+      displayClothingItems(listaPrendasOriginal);
     }
 
     if (file) {
@@ -319,7 +377,7 @@ document.querySelector("[boton-buscar]").addEventListener("click", e => {
     location.href = "/homeBuscar.html";
   }
 })
-
+updateHeartIcons();
 loadFromStorage();
 displayClothingItems(listaPrendasOriginal);
 
