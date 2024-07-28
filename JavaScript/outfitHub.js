@@ -53,11 +53,13 @@ function updateHeartIcons() {
   });
 }
 
+let listaPrendas = [];
 
 function displayClothingItems(listaPrendas) {
 
 
   //const clothingArray = JSON.parse(localStorage.getItem("prendas")) || [];
+  
   const clothingContainer = document.querySelector(".prenda-grid");
   clothingContainer.innerHTML = ``;
   //let prendasHTML = '';
