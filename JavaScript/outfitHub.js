@@ -381,3 +381,4 @@ updateHeartIcons();
 loadFromStorage();
 displayClothingItems(listaPrendasOriginal);
 
+//gjjg
