@@ -1,7 +1,8 @@
 import { loadFromStorage, addTo, prendas, removeFromPrendas, getPrenda } from "../data/ropa.js";
+import { closet, addToCloset } from "../data/closet.js";
 let idPrenda = 0;
 
-const listaPrendasOriginal = JSON.parse(localStorage.getItem("prendas"));
+let listaPrendasOriginal = JSON.parse(localStorage.getItem("prendas"));
 
 let listaPrendasBusqueda = [];
 
@@ -46,7 +47,7 @@ function updateHeartIcons() {
       const icon = button.querySelector('i');
       if (prenda.favoritos === 1) {
         icon.style.color = 'red';
-      } else if (prenda.favoritos === 0){
+      } else if (prenda.favoritos === 0) {
         icon.style.color = 'grey';
       }
     }
@@ -55,25 +56,28 @@ function updateHeartIcons() {
 
 let listaPrendas = [];
 
+
+
 function displayClothingItems(listaPrendas) {
 
-
-  //const clothingArray = JSON.parse(localStorage.getItem("prendas")) || [];
   
+  //const clothingArray = JSON.parse(localStorage.getItem("prendas")) || [];
+
   const clothingContainer = document.querySelector(".prenda-grid");
   clothingContainer.innerHTML = ``;
   //let prendasHTML = '';
   console.log(listaPrendas);
-  listaPrendas.forEach(prenda => {
-    //const prendaId = prenda.id;
+  if (listaPrendas) {
+    listaPrendas.forEach(prenda => {
+      //const prendaId = prenda.id;
 
-    //const matchingPrenda = getPrenda(prendaId);
+      //const matchingPrenda = getPrenda(prendaId);
 
-    const div = document.createElement("div");
-    div.classList.add("prenda-container");
-    div.classList.add("js-prenda-item-container");
-    div.classList.add(`js-prenda-item-container-${prenda.id}`);
-    div.innerHTML = `
+      const div = document.createElement("div");
+      div.classList.add("prenda-container");
+      div.classList.add("js-prenda-item-container");
+      div.classList.add(`js-prenda-item-container-${prenda.id}`);
+      div.innerHTML = `
           <div class="prenda-image-container">
             <img class="prenda-image" src="${prenda.image}">
           </div>
@@ -92,13 +96,16 @@ function displayClothingItems(listaPrendas) {
               <i class="fas fa-heart" style="color: ${prenda.favoritos ? 'red' : 'grey'};"></i>
             </button>
           </div>
+
           <div class="prenda-spacer"></div>
-          <button class="add-button">
-            Add
+
+          <button class="add-button js-add-to-closet"
+          data-prenda-id="${prenda.id}">
+            Añadir
           </button>
 
           <div>
-            <span class=" link-primary js-delete-link 
+            <span class="link-primary js-delete-link 
               js-delete-link-${prenda.id}" data-prenda-id="${prenda.id}">
               Borrar
             </span>
@@ -113,12 +120,32 @@ function displayClothingItems(listaPrendas) {
 
           
         `;
-    clothingContainer.appendChild(div);
+      clothingContainer.appendChild(div);
 
 
+    });
+  }
+
+  //Boton de ingresar al "carrito"
+  function updateClosetQuantity() {
+    let closetQuantity = 0;
+
+    closet.forEach((closetItem) => {
+      closetQuantity += 1;
+    });
+
+    document.querySelector('.js-closet-quantity')
+      .innerHTML = closetQuantity
+  }
+
+  document.querySelectorAll('.js-add-to-closet').forEach((button) => {
+    button.addEventListener('click', () => {
+      console.log('joa');
+      const prendaId = button.dataset.prendaId;
+      addToCloset(prendaId);
+      updateClosetQuantity();
+    });
   });
-
-  
 
   // Agregar funcionalidad a los botones de corazón
   document.querySelectorAll(".js-corazon").forEach((button) => {
@@ -146,16 +173,16 @@ function displayClothingItems(listaPrendas) {
   document.querySelectorAll('.js-delete-link').forEach((link) => {
     link.addEventListener('click', () => {
       const prendaId = link.dataset.prendaId;
-  
+
       // Llamar a la función para eliminar la prenda del local storage
       removeFromPrendas(prendaId);
-  
+
       // Eliminar la prenda de la listaPrendasOriginal
       const index = listaPrendasOriginal.findIndex(prenda => prenda.id == prendaId);
       if (index !== -1) {
         listaPrendasOriginal.splice(index, 1);
       }
-  
+
       // Encontrar y eliminar el contenedor de la prenda en la interfaz
       const container = document.querySelector(`.js-prenda-item-container-${prendaId}`);
       if (container) {
@@ -165,7 +192,6 @@ function displayClothingItems(listaPrendas) {
   });
 
   // Funcionalidad para el formulario modal (EDIT)
-
   document.querySelectorAll(".js-open-edit-form").forEach((link) => {
     link.addEventListener('click', () => {
       modal.style.display = "block";
@@ -180,7 +206,7 @@ function displayClothingItems(listaPrendas) {
       const prendaTipo = link.dataset.prendaTipo;
 
       console.log(prendaFavoritos);
-      
+
 
       // Rellenar los campos del formulario con los datos actuales
       document.getElementById("nombre").value = prendaNombre;
@@ -262,7 +288,7 @@ function displayClothingItems(listaPrendas) {
           } else {
             listaPrendasOriginal.push(formData);
           }
-          
+
           displayClothingItems(listaPrendasOriginal);
           updateHeartIcons();
         }
@@ -270,9 +296,6 @@ function displayClothingItems(listaPrendas) {
     });
   });
 
-  
-
-  
 
 
   // Funcionalidad para el formulario modal
@@ -310,11 +333,23 @@ function displayClothingItems(listaPrendas) {
       //let prendas = JSON.parse(localStorage.getItem("prendas")) || [];
 
       // Encontrar el último ID utilizado y calcular el nuevo ID
-      let lastId = listaPrendas.length > 0 ? listaPrendas[listaPrendas.length - 1].id : 0;
+      let lastId;
+      
+      if (!listaPrendasOriginal) {
+        listaPrendasOriginal = [];
+        idPrenda = 1;
+      }
+      else{
+        // Encontrar el último ID utilizado y calcular el nuevo ID
+        lastId = listaPrendas.length > 0 ? listaPrendas[listaPrendas.length - 1].id : 0;
 
 
-      idPrenda = lastId + idPrenda + 1;
-      console.log(idPrenda);
+        idPrenda = lastId + idPrenda + 1;
+        console.log(idPrenda);
+    
+      }
+        
+
 
 
       const formData = {
@@ -345,15 +380,14 @@ function displayClothingItems(listaPrendas) {
     }
   }
 
-
-
-
   document.addEventListener("DOMContentLoaded", () => {
     displayClothingItems(listaPrendas);
   });
 
 
 }
+
+
 
 
 
@@ -378,11 +412,15 @@ document.querySelector("[boton-buscar]").addEventListener("click", e => {
     document.querySelector("[boton-buscar]").classList.add("menu-botones-medio");
     location.href = "/homeBuscar.html";
   }
+
+
 })
+
 updateHeartIcons();
 loadFromStorage();
 displayClothingItems(listaPrendasOriginal);
 
-function nose () {
-  
-}
+
+
+
+
