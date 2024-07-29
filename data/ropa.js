@@ -1,5 +1,7 @@
 export let prendas = [];
 
+loadFromStorage();
+
 export function loadFromStorage() {
   const storedPrendas = JSON.parse(localStorage.getItem('prendas'));
 
@@ -20,20 +22,18 @@ export function addTo (prenda){
 
 
 export function getPrenda(prendaId) {
-  let matchingPrenda;
+  let matchingPrenda = '1';
 
   prendas.forEach((prenda) => {
-    if (prenda.id === prendaId) {
+    if (parseInt(prenda.id) === parseInt(prendaId)) {
       matchingPrenda = prenda;
     }
   });
-
   return matchingPrenda;
 }
 
 export function removeFromPrendas(prendaId) {
   const newPrendas = [];
-  
 
   prendas.forEach((prendaItem) => {
     console.log(`${prendaId}`);

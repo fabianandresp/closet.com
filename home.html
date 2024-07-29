@@ -25,7 +25,7 @@
 
     <header class="header">
         <div class="left-section">
-            <img class="logo" src="images/Logo.png">
+            <img class="logo" src="images/Logo.png" onclick="logout()">
             <a class="menu-botones-medio" boton-inicio>Inicio</a>
             <a class="menu-botones-medio" boton-buscar>Buscar</a>
             <a class="menu-botones-medio" boton-reportes>Reportes</a>
@@ -35,7 +35,13 @@
         </div>
 
         <div class="right-section">
-            <button class="logout-btn" onclick="logout()">Logout</button>
+            <div class="right-section">               
+                <a class="closet-link header-link" href="outfitSaved.html">
+                    <img class="closet-icon" src="images/closet-icon.png">
+                    <div class="closet-quantity js-cart-quantity">0</div>
+                    <div class="closet-text">Closet</div>
+                </a>
+            </div>
         </div>
 
     </header>
@@ -69,7 +75,7 @@
 
 
                     <label for="estado">Estado:</label>
-                    <select id="estado" name="temporada">
+                    <select id="estado" name="estado">
                         <option value="Sucia">Sucia</option>
                         <option value="Limpia">Limpia</option>
                     </select><br><br>
@@ -79,6 +85,13 @@
                     <select id="temporada" name="temporada">
                         <option value="Verano">Verano</option>
                         <option value="Invierno">Invierno</option>
+                    </select><br><br>
+
+                    <label for="tipo">Tipo:</label>
+                    <select id="tipo" name="tipo">
+                        <option value="3">Prenda Superior</option>
+                        <option value="2">Prenda Inferior</option>
+                        <option value="1">Zapatos</option>
                     </select><br><br>
 
                     <button type="submit" class="submit-button">Guardar</button>
