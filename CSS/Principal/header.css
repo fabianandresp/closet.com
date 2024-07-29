@@ -24,7 +24,16 @@
 
 .logo {
   height: 140px;
+  cursor: pointer;
 
+}
+
+.logo:hover {
+  opacity: 0.5;
+}
+
+.logo:active {
+  opacity: 0.2;
 }
 
 .middle-section {
@@ -39,7 +48,7 @@
 
 .right-section {
   width: 180px;
-  margin-right: 20px;
+  margin-right: 0px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -79,4 +88,35 @@
   color: rgb(166, 206, 252);
   font-weight: 600;
   cursor: pointer;
+}
+
+
+.closet-link {
+  color: black;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.closet-icon {
+  width: 63px;
+}
+
+.closet-text {
+  margin-top: 12px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.closet-quantity {
+  color: rgb(240, 136, 4);
+  font-size: 28px;
+  font-weight: 700;
+
+  position: absolute;
+  top: 0px;
+  left: 76px;
+  
+  width: 26px;
+  text-align: center;
 }

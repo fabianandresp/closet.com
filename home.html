@@ -25,7 +25,7 @@
 
     <header class="header">
         <div class="left-section">
-            <img class="logo" src="images/Logo.png">
+            <img class="logo" src="images/Logo.png" onclick="logout()">
             <a class="menu-botones-medio" boton-inicio>Inicio</a>
             <a class="menu-botones-medio" boton-buscar>Buscar</a>
         </div>
@@ -34,7 +34,13 @@
         </div>
 
         <div class="right-section">
-            <button class="logout-btn" onclick="logout()">Logout</button>
+            <div class="right-section">               
+                <a class="closet-link header-link" href="outfitSaved.html">
+                    <img class="closet-icon" src="images/closet-icon.png">
+                    <div class="closet-quantity js-cart-quantity">0</div>
+                    <div class="closet-text">Closet</div>
+                </a>
+            </div>
         </div>
 
     </header>
