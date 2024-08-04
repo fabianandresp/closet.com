@@ -18,17 +18,18 @@ p {
 
 .logo {
     margin-bottom: 5px;
-  }
-  
-  .logo img {
+}
+
+.logo img {
     height: 20px;
     margin: 0 auto;
-  }
+}
 
 /* Estilos para la página 2 y siguientes */
 .navbar {
     width: 100%;
-    background-color: #007BFF; /* Color azul */
+    background-color: #007BFF;
+    /* Color azul */
     overflow: hidden;
     position: fixed;
     top: 0;
@@ -37,7 +38,8 @@ p {
     justify-content: space-between;
 }
 
-.navbar a, .navbar .logout-btn {
+.navbar a,
+.navbar .logout-btn {
     float: left;
     display: block;
     color: #f2f2f2;
@@ -46,7 +48,8 @@ p {
     text-decoration: none;
 }
 
-.navbar a:hover, .navbar .logout-btn:hover {
+.navbar a:hover,
+.navbar .logout-btn:hover {
     background-color: #ddd;
     color: black;
 }
@@ -65,7 +68,8 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 80px; /* Ajuste de margen superior para evitar la superposición del logo y navbar */
+    margin-top: 80px;
+    /* Ajuste de margen superior para evitar la superposición del logo y navbar */
     overflow-x: auto;
     width: 100%;
 }
@@ -78,10 +82,12 @@ p {
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Tres columnas */
+    grid-template-columns: repeat(3, 1fr);
+    /* Tres columnas */
     gap: 10px;
     justify-content: center;
-    flex-shrink: 0; /* Ensure the grid doesn't shrink */
+    flex-shrink: 0;
+    /* Ensure the grid doesn't shrink */
 }
 
 .grid-item {
