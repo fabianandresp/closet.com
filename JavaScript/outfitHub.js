@@ -13,6 +13,7 @@ displayClothingItems(listaPrendasOriginal);
 
 //Obtener datos de busqueda de filtros e input bar
 
+
 function filtrar() {
 
   listaPrendasBusqueda = JSON.parse(localStorage.getItem("prendas"));
@@ -115,7 +116,8 @@ function filtrar() {
       return prenda.nombre.toLowerCase().includes(value);
     })
   }
-
+  
+  agregarReporte('Prenda buscada correctamente','Buscar prenda');
   displayClothingItems(listaPrendasBusqueda);
 
 }
@@ -261,9 +263,11 @@ function displayClothingItems(listaPrendas) {
         if (icon.style.color === "red") {
           icon.style.color = "grey";
           listaPrendasOriginal[prendaIndex].favoritos = 0;
+          agregarReporte('Prenda eliminada de favoritos','Favoritos');
         } else {
           icon.style.color = "red";
           listaPrendasOriginal[prendaIndex].favoritos = 1;
+          agregarReporte('Prenda agregada a favoritos','Favoritos');
         }
         localStorage.setItem("prendas", JSON.stringify(listaPrendasOriginal));
         displayClothingItems(listaPrendasOriginal);  // Refrescar la lista de prendas
@@ -291,6 +295,8 @@ function displayClothingItems(listaPrendas) {
       if (container) {
         container.remove();
       }
+
+      agregarReporte('Prenda eliminada correctamente','Prenda eliminada');
     });
   });
 
@@ -391,7 +397,8 @@ function displayClothingItems(listaPrendas) {
           } else {
             listaPrendasOriginal.push(formData);
           }
-
+          
+          agregarReporte('Prenda editada correctamente','Editar Prenda');
           displayClothingItems(listaPrendasOriginal);
           updateHeartIcons();
         }
@@ -478,6 +485,7 @@ function displayClothingItems(listaPrendas) {
 
     if (file) {
       reader.readAsDataURL(file);
+      agregarReporte('Prenda agregada correctamente','Agregar Prenda');
     } else {
       alert("Por favor, selecciona una imagen.");
     }
@@ -530,7 +538,7 @@ displayClothingItems(listaPrendasOriginal);
 /*IR A LA PAGINA REPORTES*/
 let isVisibleReportes = false;
 document.querySelector("[boton-reportes]").addEventListener("click", e => {
-  if (!isVisibleBuscar) {
+  if (!isVisibleReportes) {
     document.querySelector("[boton-reportes]").classList.add("menu-botones-medio-onclick");
     agregarReporte('Cambio de pestaña a reportes', 'Cambio de pestaña');
     location.href = "/homeReportes.html";
