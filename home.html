@@ -35,7 +35,7 @@
         </div>
 
         <div class="right-section">
-            <div class="right-section">               
+            <div class="right-section">
                 <a class="closet-link header-link" href="outfitSaved.html">
                     <img class="closet-icon" src="images/closet-icon.png">
                     <div class="closet-quantity js-cart-quantity">0</div>
@@ -49,12 +49,39 @@
     <!--Parte principal de la aplicacion-->
     <main class="main">
         <p class="titulo-prenda">Prendas disponibles</p>
+        <div class="botonAgregarBuscar">
+            <div class="botonAgregar">
+                <button id="openFormButton" class="boton-agregar">
+                    Agregar Prenda
+                </button>
+            </div>
 
-        <div class="botonesAgregarBuscar">
-            <button id="openFormButton" class="boton-agregar">
-                Agregar Prenda
-            </button>
+            <div class="checkboxesFiltros">
+                <label> Sucia </label>
+                <input type="checkbox" id="checkboxSucia" name="checkboxSucia">
+                <label> Limpia </label>
+                <input type="checkbox" id="checkboxLimpia" name="checkboxLimpia">
+                <label> Verano </label>
+                <input type="checkbox" id="checkboxVerano" name="checkboxVerano">
+                <label> Invierno </label>
+                <input type="checkbox" id="checkboxInvierno" name="checkboxInvierno">
+
+                <label> Prenda superior </label>
+                <input type="checkbox" id="checkboxSuperior" name="checkboxSuperior">
+                <label> Prenda inferior </label>
+                <input type="checkbox" id="checkboxInferior" name="checkboxInferior">
+                <label> Zapatos </label>
+                <input type="checkbox" id="checkboxZapatos" name="checkboxZapatos">
+            </div>
+
+            <div class="inputBuscar">
+
+                <input class="barra-busqueda" data-search placeholder="Buscar prenda">
+                <button class="boton-buscar" id="js-boton-buscar">Buscar</button>
+            </div>
+
         </div>
+
 
         <div class="prenda-grid js-prenda-grid"></div>
 

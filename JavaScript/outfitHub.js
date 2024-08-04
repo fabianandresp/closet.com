@@ -6,21 +6,125 @@ let listaPrendasOriginal = JSON.parse(localStorage.getItem("prendas"));
 
 let listaPrendasBusqueda = [];
 
+const botonBuscar = document.getElementById('js-boton-buscar');
+botonBuscar.addEventListener("click", filtrar);
 
-const inputBuscar = document.querySelector("[data-search]") || null;
+displayClothingItems(listaPrendasOriginal);
 
-if (inputBuscar != null) {
-  inputBuscar.addEventListener("input", e => {
-    const value = e.target.value.toLowerCase();
-    listaPrendasBusqueda = listaPrendasOriginal.filter(prenda => {
+//Obtener datos de busqueda de filtros e input bar
 
-      return prenda.nombre.toLowerCase().includes(value);
 
+function filtrar() {
+
+  listaPrendasBusqueda = JSON.parse(localStorage.getItem("prendas"));
+
+  const filtroSuperior = document.getElementById('checkboxSuperior');
+  const filtroInferior = document.getElementById('checkboxInferior');
+  const filtroZapatos = document.getElementById('checkboxZapatos');
+
+  const filtroSucia = document.getElementById('checkboxSucia');
+  const filtroLimpia = document.getElementById('checkboxLimpia');
+
+  const filtroVerano = document.getElementById('checkboxVerano');
+  const filtroInvierno = document.getElementById('checkboxInvierno');
+
+  const inputBuscar = document.querySelector("[data-search]");
+
+
+
+  if (filtroSuperior.checked && filtroInferior.checked && filtroZapatos.checked) {
+    console.log("Toda categoria");
+    listaPrendasBusqueda = listaPrendasBusqueda.filter(prenda => {
+      return prenda.tipoRopaId == 3 || prenda.tipoRopaId == 2 || prenda.tipoRopaId == 1;
     })
-    agregarReporte('Prenda buscada correctamente','Buscar prenda');
-    displayClothingItems(listaPrendasBusqueda);
-  })
+
+  } else if (filtroSuperior.checked && filtroInferior.checked) {
+    console.log("Superior Inferior");
+    listaPrendasBusqueda = listaPrendasBusqueda.filter(prenda => {
+      return prenda.tipoRopaId == 3 || prenda.tipoRopaId == 2;
+    })
+
+  } else if (filtroSuperior.checked && filtroZapatos.checked) {
+    console.log("Superior Zapatos");
+    listaPrendasBusqueda = listaPrendasBusqueda.filter(prenda => {
+      return prenda.tipoRopaId == 3 || prenda.tipoRopaId == 1;
+    })
+
+  } else if (filtroZapatos.checked && filtroInferior.checked) {
+    console.log("Zapatos Inferior");
+    listaPrendasBusqueda = listaPrendasBusqueda.filter(prenda => {
+      return prenda.tipoRopaId == 2 || prenda.tipoRopaId == 1;
+    })
+
+  } else if (filtroZapatos.checked) {
+    console.log("Zapatos");
+    listaPrendasBusqueda = listaPrendasBusqueda.filter(prenda => {
+      return prenda.tipoRopaId == 1;
+    })
+
+  } else if (filtroInferior.checked) {
+    console.log("Inferior");
+    listaPrendasBusqueda = listaPrendasBusqueda.filter(prenda => {
+      return prenda.tipoRopaId == 2;
+    })
+
+  } else if (filtroSuperior.checked) {
+    console.log("Superior");
+    listaPrendasBusqueda = listaPrendasBusqueda.filter(prenda => {
+      return prenda.tipoRopaId == 3;
+    })
+
+  }
+
+  if (filtroSucia.checked) {
+    console.log("Sucia");
+    listaPrendasBusqueda = listaPrendasBusqueda.filter(prenda => {
+      return prenda.estado == "Sucia";
+    })
+  }
+  if (filtroLimpia.checked) {
+    console.log("Limpia");
+    listaPrendasBusqueda = listaPrendasBusqueda.filter(prenda => {
+      return prenda.estado == "Limpia";
+    })
+  }
+
+  if (filtroVerano.checked) {
+    console.log("Verano");
+    listaPrendasBusqueda = listaPrendasBusqueda.filter(prenda => {
+      return prenda.temporada == "Verano";
+    })
+  }
+  if (filtroInvierno.checked) {
+    console.log("Invierno");
+    listaPrendasBusqueda = listaPrendasBusqueda.filter(prenda => {
+      return prenda.temporada == "Invierno";
+    })
+  }
+
+
+  if (inputBuscar.value == "") {
+    console.log("Sin entrada");
+    const value = inputBuscar.value.toLowerCase();
+    listaPrendasBusqueda = listaPrendasBusqueda.filter(prenda => {
+      return prenda.nombre.toLowerCase().includes(value);
+    })
+  } else {
+    console.log("Con entrada");
+    const value = inputBuscar.value.toLowerCase();
+    listaPrendasBusqueda = listaPrendasBusqueda.filter(prenda => {
+      return prenda.nombre.toLowerCase().includes(value);
+    })
+  }
+  
+  agregarReporte('Prenda buscada correctamente','Buscar prenda');
+  displayClothingItems(listaPrendasBusqueda);
+
 }
+
+
+
+
 function ropaTipoId(idOrName) {
   switch (idOrName) {
     case 1:
@@ -61,7 +165,7 @@ let listaPrendas = [];
 
 function displayClothingItems(listaPrendas) {
 
-  
+
   //const clothingArray = JSON.parse(localStorage.getItem("prendas")) || [];
 
   const clothingContainer = document.querySelector(".prenda-grid");
@@ -340,21 +444,21 @@ function displayClothingItems(listaPrendas) {
 
       // Encontrar el último ID utilizado y calcular el nuevo ID
       let lastId;
-      
+
       if (!listaPrendasOriginal) {
         listaPrendasOriginal = [];
         idPrenda = 1;
       }
-      else{
+      else {
         // Encontrar el último ID utilizado y calcular el nuevo ID
         lastId = listaPrendas.length > 0 ? listaPrendas[listaPrendas.length - 1].id : 0;
 
 
         idPrenda = lastId + idPrenda + 1;
         console.log(idPrenda);
-    
+
       }
-        
+
 
 
 
@@ -402,11 +506,11 @@ let isVisibleInicio = false;
 document.querySelector("[boton-inicio]").addEventListener("click", e => {
   if (!isVisibleInicio) {
     document.querySelector("[boton-inicio]").classList.add("menu-botones-medio-onclick");
-    agregarReporte('Cambio de pestaña a inicio','Cambio de pestaña');
+    agregarReporte('Cambio de pestaña a inicio', 'Cambio de pestaña');
     location.href = "/home.html";
   } else {
     document.querySelector("[boton-inicio]").classList.add("menu-botones-medio");
-    agregarReporte('Cambio de pestaña a inicio','Cambio de pestaña');
+    agregarReporte('Cambio de pestaña a inicio', 'Cambio de pestaña');
     location.href = "/home.html";
   }
 })
@@ -416,11 +520,11 @@ let isVisibleBuscar = false;
 document.querySelector("[boton-buscar]").addEventListener("click", e => {
   if (!isVisibleBuscar) {
     document.querySelector("[boton-buscar]").classList.add("menu-botones-medio-onclick");
-    agregarReporte('Cambio de pestaña a buscar','Cambio de pestaña');
+    agregarReporte('Cambio de pestaña a buscar', 'Cambio de pestaña');
     location.href = "/homeBuscar.html";
   } else {
     document.querySelector("[boton-buscar]").classList.add("menu-botones-medio");
-    agregarReporte('Cambio de pestaña a buscar','Cambio de pestaña');
+    agregarReporte('Cambio de pestaña a buscar', 'Cambio de pestaña');
     location.href = "/homeBuscar.html";
   }
 
@@ -436,11 +540,11 @@ let isVisibleReportes = false;
 document.querySelector("[boton-reportes]").addEventListener("click", e => {
   if (!isVisibleReportes) {
     document.querySelector("[boton-reportes]").classList.add("menu-botones-medio-onclick");
-    agregarReporte('Cambio de pestaña a reportes','Cambio de pestaña');
+    agregarReporte('Cambio de pestaña a reportes', 'Cambio de pestaña');
     location.href = "/homeReportes.html";
   } else {
     document.querySelector("[boton-reportes]").classList.add("menu-botones-medio");
-    agregarReporte('Cambio de pestaña a reportes','Cambio de pestaña');
+    agregarReporte('Cambio de pestaña a reportes', 'Cambio de pestaña');
     location.href = "/homeReportes.html";
   }
 })
