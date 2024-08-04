@@ -18,6 +18,9 @@ body {
 
 }
 
+
+
+
 .botonAgregarBuscar .botonAgregar {
   padding-left: 40px;
   flex: 1;
@@ -55,5 +58,16 @@ body {
   background-color: rgb(39, 133, 29);
   color: white;
   font-size: x-large;
+  cursor: pointer;
+}
+
+.botonAgregarBuscar .boton-buscar {
+  margin: 10px;
+  width: 100px;
+  height: 35px;
+  border: none;
+  background-color: rgb(114, 114, 114);
+  color: white;
+  font-size: large;
   cursor: pointer;
 }

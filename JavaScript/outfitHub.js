@@ -116,8 +116,8 @@ function filtrar() {
       return prenda.nombre.toLowerCase().includes(value);
     })
   }
-  
-  agregarReporte('Prenda buscada correctamente','Buscar prenda');
+
+  agregarReporte('Prenda buscada correctamente', 'Buscar prenda');
   displayClothingItems(listaPrendasBusqueda);
 
 }
@@ -263,11 +263,11 @@ function displayClothingItems(listaPrendas) {
         if (icon.style.color === "red") {
           icon.style.color = "grey";
           listaPrendasOriginal[prendaIndex].favoritos = 0;
-          agregarReporte('Prenda eliminada de favoritos','Favoritos');
+          agregarReporte('Prenda eliminada de favoritos', 'Favoritos');
         } else {
           icon.style.color = "red";
           listaPrendasOriginal[prendaIndex].favoritos = 1;
-          agregarReporte('Prenda agregada a favoritos','Favoritos');
+          agregarReporte('Prenda agregada a favoritos', 'Favoritos');
         }
         localStorage.setItem("prendas", JSON.stringify(listaPrendasOriginal));
         displayClothingItems(listaPrendasOriginal);  // Refrescar la lista de prendas
@@ -296,7 +296,7 @@ function displayClothingItems(listaPrendas) {
         container.remove();
       }
 
-      agregarReporte('Prenda eliminada correctamente','Prenda eliminada');
+      agregarReporte('Prenda eliminada correctamente', 'Prenda eliminada');
     });
   });
 
@@ -397,8 +397,8 @@ function displayClothingItems(listaPrendas) {
           } else {
             listaPrendasOriginal.push(formData);
           }
-          
-          agregarReporte('Prenda editada correctamente','Editar Prenda');
+
+          agregarReporte('Prenda editada correctamente', 'Editar Prenda');
           displayClothingItems(listaPrendasOriginal);
           updateHeartIcons();
         }
@@ -485,7 +485,7 @@ function displayClothingItems(listaPrendas) {
 
     if (file) {
       reader.readAsDataURL(file);
-      agregarReporte('Prenda agregada correctamente','Agregar Prenda');
+      agregarReporte('Prenda agregada correctamente', 'Agregar Prenda');
     } else {
       alert("Por favor, selecciona una imagen.");
     }
@@ -500,36 +500,20 @@ function displayClothingItems(listaPrendas) {
 
 
 
-
-
-let isVisibleInicio = false;
 document.querySelector("[boton-inicio]").addEventListener("click", e => {
-  if (!isVisibleInicio) {
+  if (document.querySelector("[boton-inicio]").classList.contains("menu-botones-medio-onclick")) {
+
+    document.querySelector("[boton-inicio]").classList.remove("menu-botones-medio-onclick");
+    agregarReporte('Cambio de pestaña a inicio', 'Cambio de pestaña');
+    location.href = "/home.html";
+
+  } else {
     document.querySelector("[boton-inicio]").classList.add("menu-botones-medio-onclick");
     agregarReporte('Cambio de pestaña a inicio', 'Cambio de pestaña');
     location.href = "/home.html";
-  } else {
-    document.querySelector("[boton-inicio]").classList.add("menu-botones-medio");
-    agregarReporte('Cambio de pestaña a inicio', 'Cambio de pestaña');
-    location.href = "/home.html";
   }
 })
 
-
-let isVisibleBuscar = false;
-document.querySelector("[boton-buscar]").addEventListener("click", e => {
-  if (!isVisibleBuscar) {
-    document.querySelector("[boton-buscar]").classList.add("menu-botones-medio-onclick");
-    agregarReporte('Cambio de pestaña a buscar', 'Cambio de pestaña');
-    location.href = "/homeBuscar.html";
-  } else {
-    document.querySelector("[boton-buscar]").classList.add("menu-botones-medio");
-    agregarReporte('Cambio de pestaña a buscar', 'Cambio de pestaña');
-    location.href = "/homeBuscar.html";
-  }
-
-
-})
 
 updateHeartIcons();
 loadFromStorage();
@@ -539,10 +523,12 @@ displayClothingItems(listaPrendasOriginal);
 let isVisibleReportes = false;
 document.querySelector("[boton-reportes]").addEventListener("click", e => {
   if (!isVisibleReportes) {
+    isVisibleReportes = true;
     document.querySelector("[boton-reportes]").classList.add("menu-botones-medio-onclick");
     agregarReporte('Cambio de pestaña a reportes', 'Cambio de pestaña');
     location.href = "/homeReportes.html";
   } else {
+    isVisibleReportes = false;
     document.querySelector("[boton-reportes]").classList.add("menu-botones-medio");
     agregarReporte('Cambio de pestaña a reportes', 'Cambio de pestaña');
     location.href = "/homeReportes.html";

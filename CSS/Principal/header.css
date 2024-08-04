@@ -68,24 +68,28 @@
 
 
 .menu-botones-medio {
+  text-align-last: center;
+  vertical-align: middle;
   width: 100px;
-  height: 100px;
+  height: 40px;
   border: none;
   font-size: x-large;
   background-color: rgb(166, 206, 252);
-  color: rgb(81, 81, 81);
+  color: rgb(255, 255, 255);
   font-weight: 600;
   cursor: pointer;
 
 }
 
 .menu-botones-medio-onclick {
+  vertical-align: middle;
+  text-align-last: center;
   width: 100px;
-  height: 100px;
+  height: 40px;
   border: none;
   font-size: x-large;
-  background-color: rgb(81, 81, 81);
-  color: rgb(166, 206, 252);
+  background-color: rgb(166, 206, 252);
+  color: rgb(81, 81, 81);
   font-weight: 600;
   cursor: pointer;
 }
@@ -116,7 +120,7 @@
   position: absolute;
   top: 0px;
   left: 76px;
-  
+
   width: 26px;
   text-align: center;
 }
