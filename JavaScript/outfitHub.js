@@ -28,6 +28,8 @@ function filtrar() {
   const filtroVerano = document.getElementById('checkboxVerano');
   const filtroInvierno = document.getElementById('checkboxInvierno');
 
+  const filtroFavoritos = document.getElementById('checkboxFavoritos');
+
   const inputBuscar = document.querySelector("[data-search]");
 
 
@@ -99,6 +101,13 @@ function filtrar() {
     console.log("Invierno");
     listaPrendasBusqueda = listaPrendasBusqueda.filter(prenda => {
       return prenda.temporada == "Invierno";
+    })
+  }
+
+  if (filtroFavoritos.checked) {
+    console.log("Favoritos");
+    listaPrendasBusqueda = listaPrendasBusqueda.filter(prenda => {
+      return prenda.favoritos == 1;
     })
   }
 
