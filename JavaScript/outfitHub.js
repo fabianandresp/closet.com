@@ -254,7 +254,6 @@ function displayClothingItems(listaPrendas) {
 
   document.querySelectorAll('.js-add-to-closet').forEach((button) => {
     button.addEventListener('click', () => {
-      console.log('joa');
       const prendaId = button.dataset.prendaId;
       addToCloset(prendaId);
       updateClosetQuantity();
