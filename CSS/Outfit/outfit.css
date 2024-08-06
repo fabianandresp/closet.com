@@ -20,7 +20,7 @@
   margin-bottom: 18px;
 }
 
-.checkout-grid {
+.outfit-grid {
   display: grid;
   /* Here, 1fr means the first column will take
      up the remaining space in the grid. */
@@ -90,6 +90,27 @@
   margin-bottom: 5px;
 }
 
+.prenda-image-summary {
+  max-width: 50%;
+  max-height: 50px;
+
+  /* margin-left: auto;
+     margin-right auto;
+     Is a trick for centering an element horizontally
+     without needing a container. */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.prenda-name {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.prenda-temporada {
+  font-size: 14px;
+  font-weight: 200;
+}
 
 @media (max-width: 1000px) {
   .delivery-options {
@@ -164,4 +185,8 @@
 
   margin-top: 11px;
   margin-bottom: 15px;
+}
+
+.outfit-summary {
+  
 }

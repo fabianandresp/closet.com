@@ -60,6 +60,13 @@ body {
   font-size: x-large;
   cursor: pointer;
 }
+.botonAgregarBuscar .boton-agregar:hover {
+  opacity: 0.8;
+}
+
+.botonAgregarBuscar .boton-agregar:active {
+  opacity: 0.5;
+}
 
 .botonAgregarBuscar .boton-buscar {
   margin: 10px;
@@ -70,4 +77,32 @@ body {
   color: white;
   font-size: large;
   cursor: pointer;
+}
+
+.link-primary {
+  color: rgb(1, 124, 182);
+  cursor: pointer;
+}
+
+.link-primary:hover {
+  color: rgb(196, 80, 0);
+}
+
+
+.button-primary {
+  color: rgb(33, 33, 33);
+  background-color: rgb(9, 199, 233);
+  border: 1px solid rgb(9, 199, 210);
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(213, 217, 217, 0.5);
+}
+
+.button-primary:hover {
+  opacity: 0.7;
+}
+
+.button-primary:active {
+  opacity: 0.5;
+  box-shadow: none;
 }

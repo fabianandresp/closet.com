@@ -1,3 +1,10 @@
 import { renderOutfit } from "./Save/revisarOutfit.js";
+import { renderOutfitSummary } from "./Save/guardarOutfit.js";
 
-renderOutfit();
+
+export function loadPage () {
+  renderOutfitSummary();
+  renderOutfit();
+}
+
+loadPage();
