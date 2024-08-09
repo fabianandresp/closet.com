@@ -27,14 +27,24 @@
 <body>
     <header class="header">
         <div class="left-section">
-            <img class="logo" src="images/Logo.png">
+            <img class="logo" src="images/Logo.png" onclick="logout()">
             <a class="menu-botones-medio" boton-inicio>Inicio</a>
-            <a class="menu-botones-medio" boton-buscar>Reportes</a>
+            <a class="menu-botones-medio" boton-reportes>Reportes</a>
         </div>
-        <div class="middle-section"></div>
+
+        <div class="middle-section">
+        </div>
+
         <div class="right-section">
-            <button class="logout-btn" onclick="logout()">Logout</button>
+            <div class="right-section">
+                <a class="closet-link header-link" href="outfit.html">
+                    <img class="closet-icon" src="images/closet-icon.png">
+                    <div class="closet-quantity js-cart-quantity">0</div>
+                    <div class="closet-text">Closet</div>
+                </a>
+            </div>
         </div>
+
     </header>
 
     <main class="main reportes-section">
