@@ -6,6 +6,8 @@ let listaPrendasOriginal = JSON.parse(localStorage.getItem("prendas"));
 
 let listaPrendasBusqueda = [];
 
+const loggedInUser = localStorage.getItem('loggedInUser');
+
 const botonBuscar = document.getElementById('js-boton-buscar');
 botonBuscar.addEventListener("click", filtrar);
 
@@ -32,7 +34,7 @@ function filtrar() {
 
   const inputBuscar = document.querySelector("[data-search]");
 
-
+  const value = inputBuscar.value.toLowerCase();
 
   if (filtroSuperior.checked && filtroInferior.checked && filtroZapatos.checked) {
     console.log("Toda categoria");
@@ -126,7 +128,8 @@ function filtrar() {
     })
   }
 
-  agregarReporte('Prenda buscada correctamente', 'Buscar prenda');
+  agregarReporte(`La prenda con el nombre "${value}" fue buscada correctamente`, 'Buscar prenda');
+  
   displayClothingItems(listaPrendasBusqueda);
 
 }
@@ -272,11 +275,11 @@ function displayClothingItems(listaPrendas) {
         if (icon.style.color === "red") {
           icon.style.color = "grey";
           listaPrendasOriginal[prendaIndex].favoritos = 0;
-          agregarReporte('Prenda eliminada de favoritos', 'Favoritos');
+          agregarReporte('Prenda ' + listaPrendasOriginal[prendaIndex].nombre + ' eliminada de favoritos', 'Favoritos');
         } else {
           icon.style.color = "red";
           listaPrendasOriginal[prendaIndex].favoritos = 1;
-          agregarReporte('Prenda agregada a favoritos', 'Favoritos');
+          agregarReporte('Prenda ' + listaPrendasOriginal[prendaIndex].nombre + ' agregada a favoritos', 'Favoritos');
         }
         localStorage.setItem("prendas", JSON.stringify(listaPrendasOriginal));
         displayClothingItems(listaPrendasOriginal);  // Refrescar la lista de prendas
@@ -305,7 +308,7 @@ function displayClothingItems(listaPrendas) {
         container.remove();
       }
 
-      agregarReporte('Prenda eliminada correctamente', 'Prenda eliminada');
+      agregarReporte('Prenda ' + listaPrendasOriginal[index].nombre + ' eliminada correctamente', 'Prenda eliminada');
     });
   });
 
@@ -407,7 +410,7 @@ function displayClothingItems(listaPrendas) {
             listaPrendasOriginal.push(formData);
           }
 
-          agregarReporte('Prenda editada correctamente', 'Editar Prenda');
+          agregarReporte('Prenda ' + listaPrendasOriginal[index].nombre + ' editada correctamente', 'Editar Prenda');
           displayClothingItems(listaPrendasOriginal);
           updateHeartIcons();
         }
@@ -484,6 +487,8 @@ function displayClothingItems(listaPrendas) {
 
       addTo(formData);
 
+      agregarReporte('Prenda ' + formData.nombre + ' agregada correctamente', 'Agregar Prenda');
+
       modal.style.display = "none";
       form.reset();
 
@@ -494,7 +499,6 @@ function displayClothingItems(listaPrendas) {
 
     if (file) {
       reader.readAsDataURL(file);
-      agregarReporte('Prenda agregada correctamente', 'Agregar Prenda');
     } else {
       alert("Por favor, selecciona una imagen.");
     }
@@ -513,12 +517,12 @@ document.querySelector("[boton-inicio]").addEventListener("click", e => {
   if (document.querySelector("[boton-inicio]").classList.contains("menu-botones-medio-onclick")) {
 
     document.querySelector("[boton-inicio]").classList.remove("menu-botones-medio-onclick");
-    agregarReporte('Cambio de pestaña a inicio', 'Cambio de pestaña');
+    agregarReporte(loggedInUser + ' cambio de pestaña a inicio', 'Cambio de pestaña');
     location.href = "/home.html";
 
   } else {
     document.querySelector("[boton-inicio]").classList.add("menu-botones-medio-onclick");
-    agregarReporte('Cambio de pestaña a inicio', 'Cambio de pestaña');
+    agregarReporte(loggedInUser + ' cambio de pestaña a inicio', 'Cambio de pestaña');
     location.href = "/home.html";
   }
 })
@@ -534,12 +538,12 @@ document.querySelector("[boton-reportes]").addEventListener("click", e => {
   if (!isVisibleReportes) {
     isVisibleReportes = true;
     document.querySelector("[boton-reportes]").classList.add("menu-botones-medio-onclick");
-    agregarReporte('Cambio de pestaña a reportes', 'Cambio de pestaña');
+    agregarReporte(loggedInUser + ' cambio de pestaña a reportes', 'Cambio de pestaña');
     location.href = "/homeReportes.html";
   } else {
     isVisibleReportes = false;
     document.querySelector("[boton-reportes]").classList.add("menu-botones-medio");
-    agregarReporte('Cambio de pestaña a reportes', 'Cambio de pestaña');
+    agregarReporte(loggedInUser + ' ambio de pestaña a reportes', 'Cambio de pestaña');
     location.href = "/homeReportes.html";
   }
 })

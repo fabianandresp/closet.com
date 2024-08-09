@@ -1,3 +1,5 @@
+const loggedInUser = localStorage.getItem('loggedInUser');
+
 document.addEventListener('DOMContentLoaded', () => {
     const reportesDiv = document.getElementById('reportes-list');
     let reportes = JSON.parse(localStorage.getItem('reportes')) || [];
@@ -19,25 +21,11 @@ let isVisibleInicio = false;
 document.querySelector("[boton-inicio]").addEventListener("click", e => {
   if (!isVisibleInicio) {
     document.querySelector("[boton-inicio]").classList.add("menu-botones-medio-onclick");
-    agregarReporte('Cambio de pestaña a inicio','Cambio de pestaña');
+    agregarReporte(loggedInUser + ' cambio de pestaña a inicio','Cambio de pestaña');
     location.href = "/home.html";
   } else {
     document.querySelector("[boton-inicio]").classList.add("menu-botones-medio");
-    agregarReporte('Cambio de pestaña a inicio','Cambio de pestaña');
+    agregarReporte(loggedInUser + ' cambio de pestaña a inicio','Cambio de pestaña');
     location.href = "/home.html";
   }
-})
-
-
-let isVisibleBuscar = false;
-document.querySelector("[boton-buscar]").addEventListener("click", e => {
-  if (!isVisibleBuscar) {
-    document.querySelector("[boton-buscar]").classList.add("menu-botones-medio-onclick");
-    agregarReporte('Cambio de pestaña a buscar','Cambio de pestaña');
-    location.href = "/homeBuscar.html";
-  } else {
-    document.querySelector("[boton-buscar]").classList.add("menu-botones-medio");
-    agregarReporte('Cambio de pestaña a buscar','Cambio de pestaña');
-    location.href = "/homeBuscar.html";
-  }
-})
+});
