@@ -9,6 +9,7 @@ function login(event) {
 
     const user = users.find(user => user.username === username && user.password === password);
     if (user) {
+        localStorage.setItem('loggedInUser', username);
         limpiarReportes();
         agregarReporte('Inicio de sesion exitoso para el usuario ' + username, 'Inicio de sesion - Exitoso');
         window.location.href = 'home.html';
