@@ -4,51 +4,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OutfitHub</title>
-
-    <!--Font script-->
-    <script src="https://kit.fontawesome.com/59e21f627f.js" crossorigin="anonymous"></script>
-
-    <script src="JavaScript/app.js" defer></script>
-
-    <!-- Load a font called Roboto from Google Fonts. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-
+    
     <!--Todo los documentos de CSS-->
-    <link rel="stylesheet" href="CSS/Principal/header.css">
-    <link rel="stylesheet" href="CSS/Principal/outfitHub.css">
+    <link rel="stylesheet" href="CSS/Closet/closet.css">
+    <link rel="stylesheet" href="CSS/Outfit/outfit-header.css">
     <link rel="stylesheet" href="CSS/Principal/general.css">
+
+</head>
 
 <body>
 
-    <header class="header">
-        <div class="left-section">
-            <img class="logo" src="images/Logo.png" onclick="logout()">
-            <a class="menu-botones-medio" boton-inicio>Inicio</a>
-            <a class="menu-botones-medio" boton-reportes>Reportes</a>
+    <div class="outfit-header">
+        <div class="header-content">
+          <div class="outfit-header-left-section">
+            <a href="home.html">
+              <img class="app-logo" src="images/logo.png">
+              <img class="app-mobile-logo" src="images/logo.png">
+            </a>
+          </div>
+  
+          <div class="outfit-header-middle-section">
+            Outfits (<a class="return-to-home-link"
+              href="home.html">3</a>)
+          </div>
+  
+          <div class="outfit-header-right-section">
+          </div>
         </div>
+      </div>
 
-        <div class="middle-section">
-        </div>
 
-        <div class="right-section">
-            <div class="right-section">
-                <a class="closet-link header-link" href="outfit.html">
-                    <img class="closet-icon" src="images/closet-icon.png">
-                    <div class="closet-quantity js-closet-quantity">0</div>
-                    <div class="closet-text">Closet</div>
-                </a>
+    <main class="main">
+        <div class="container">
+            <h1 class="page-title">Ver Outfits Guardados</h1>
+
+            <div class="order-closet js-outfit-closet">
+                <!-- Aquí se insertará el resumen del outfit -->
             </div>
         </div>
-
-    </header>
-
-    <!--Parte principal de la aplicacion-->
-    <main class="main">
-        
     </main>
 </body>
+
+<script type="module" src="JavaScript/viewCloset.js"></script>
 
 </html>

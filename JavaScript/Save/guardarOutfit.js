@@ -40,6 +40,11 @@ export function renderOutfitSummary() {
   });
 
   outfitSummaryHTML += `
+    <div class="outfit-name-container">
+      <label for="outfit-name">Nombre del Outfit:</label>
+      <input type="text" id="outfit-name" class="js-outfit-name" placeholder="Ingresa el nombre del outfit">
+    </div>
+  
     <a href= "closet.html">
       <button class="place-order-button button-primary js-save-outfit">
         Guardar Outfit
@@ -54,7 +59,9 @@ export function renderOutfitSummary() {
   document.querySelectorAll('.js-save-outfit').forEach((button) => {
     button.addEventListener('click', () => {
       const prendaIds = closet.map(item => item.id);
-      addToClosetSaved(prendaIds);
+      const outfitName = document.querySelector('.js-outfit-name').value;
+
+      addToClosetSaved(prendaIds, outfitName);
       closet.forEach((closetItem) => {
         const prendaId = closetItem.id;
         removeFromCloset(prendaId);

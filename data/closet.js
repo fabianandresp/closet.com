@@ -1,17 +1,10 @@
-export let closet;
+export let closet = []; // Inicializa closet como un array vacío
 
 loadFromStorage();
 
 export function loadFromStorage() {
-  closet = JSON.parse(localStorage.getItem('closet'));
-
-  if (!closet) {
-    closet = [{
-      productId: '1'
-    }, {
-      productId: '2'
-    }];
-  }
+  const storedCloset = localStorage.getItem('closet');
+  closet = storedCloset ? JSON.parse(storedCloset) : []; // Si no hay datos, inicializa closet como un array vacío
 }
 
 function saveToStorage() {
@@ -22,14 +15,16 @@ export function addToCloset(prendaId) {
   let matchingItem;
 
   closet.forEach((closetItem) => {
-    if (prendaId === closetItem.prendaId) {
+    if (prendaId === closetItem.id) {
       matchingItem = closetItem;
     }
   });
 
-  closet.push({
-    id: prendaId,
-  })
+  if (!matchingItem) {
+    closet.push({
+      id: prendaId
+    });
+  }
 
   console.log(closet);
   saveToStorage();
@@ -40,16 +35,11 @@ export function removeFromCloset(prendaId) {
 
   closet.forEach((closetItem) => {
     console.log(closetItem.id);
-    //console.log(prendaId);
     if (parseInt(closetItem.id) !== parseInt(prendaId)) {
       newCart.push(closetItem);
     }
   });
 
   closet = newCart;
-
   saveToStorage();
 }
-
-
-

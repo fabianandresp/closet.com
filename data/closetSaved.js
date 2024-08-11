@@ -1,6 +1,6 @@
 export let closetSaved = [];
 
-// Apenas iniciar este module se corren los outfit guardados anteriormente
+// Apenas iniciar este module se corren los outfit guardados anteriormente en el carrito
 (function loadFromStorage() {
   const savedData = localStorage.getItem('closetSaved');
   if (savedData) {
@@ -16,12 +16,13 @@ function generateUniqueId() {
   return Date.now().toString(); // Genera id por la hora que se genero
 }
 
-export function addToClosetSaved(prendaId) {
+export function addToClosetSaved(prendaId, outfitName) {
   const groupId = generateUniqueId();
   console.log(closetSaved);
   const group = {
     groupId: groupId,
-    prendaId: prendaId,
+    groupName: outfitName,
+    prendaId: prendaId
   };
 
   closetSaved.push(group);
@@ -31,11 +32,12 @@ export function addToClosetSaved(prendaId) {
 
 export function removeFromClosetSaved(prendaId) {
   const newCart = [];
-
+  console.log(parseInt(prendaId));
   closetSaved.forEach((closetItem) => {
-    console.log(closetItem.id);
+    
     //console.log(prendaId);
-    if (parseInt(closetItem.id) !== parseInt(prendaId)) {
+    if (parseInt(closetItem.groupId) !== parseInt(prendaId)) {
+      console.log(parseInt(closetItem.groupId));
       newCart.push(closetItem);
     }
   });

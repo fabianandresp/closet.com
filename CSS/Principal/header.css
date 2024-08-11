@@ -47,7 +47,7 @@
 }
 
 .right-section {
-  width: 180px;
+  width: 350px;
   margin-right: 0px;
   display: flex;
   align-items: center;
@@ -100,7 +100,10 @@
   display: flex;
   align-items: center;
   position: relative;
+  margin-right: 50px;
+
 }
+
 
 .closet-icon {
   width: 63px;
@@ -111,6 +114,24 @@
   font-size: 18px;
   font-weight: 700;
 }
+
+.closet-link2 {
+  color: black;
+  display: flex;
+  align-items: center;
+}
+
+.closet-icon2 {
+  width: 100px;
+  border-right: 100px;
+}
+
+.closet-text2 {
+  margin-top: 12px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
 
 .closet-quantity {
   color: rgb(240, 136, 4);
