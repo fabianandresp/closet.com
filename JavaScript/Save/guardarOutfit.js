@@ -1,9 +1,6 @@
-
-
-
 import { closet, removeFromCloset } from "../../data/closet.js";
 import { getPrenda } from "../../data/ropa.js";
-
+import { addToClosetSaved } from "../../data/closetSaved.js";
 
 let outfitSummaryHTML = `
     <div class="outfit-summary-title">
@@ -43,13 +40,33 @@ export function renderOutfitSummary() {
   });
 
   outfitSummaryHTML += `
-
-    <button class="place-order-button button-primary js-place-order">
-      Guardar Outfit
-    </button>
+    <div class="outfit-name-container">
+      <label for="outfit-name">Nombre del Outfit:</label>
+      <input type="text" id="outfit-name" class="js-outfit-name" placeholder="Ingresa el nombre del outfit">
+    </div>
+  
+    <a href= "closet.html">
+      <button class="place-order-button button-primary js-save-outfit">
+        Guardar Outfit
+      </button>
+    </a>
   `;
+
 
   document.querySelector('.js-outfit-summary-final')
     .innerHTML = outfitSummaryHTML;
+
+  document.querySelectorAll('.js-save-outfit').forEach((button) => {
+    button.addEventListener('click', () => {
+      const prendaIds = closet.map(item => item.id);
+      const outfitName = document.querySelector('.js-outfit-name').value;
+
+      addToClosetSaved(prendaIds, outfitName);
+      closet.forEach((closetItem) => {
+        const prendaId = closetItem.id;
+        removeFromCloset(prendaId);
+      });
+    });
+  });
 
 }
