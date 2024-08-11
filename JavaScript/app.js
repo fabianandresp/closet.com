@@ -12,7 +12,7 @@ function login(event) {
         localStorage.setItem('loggedInUser', username);
         limpiarReportes();
         agregarReporte('Inicio de sesion exitoso para el usuario ' + username, 'Inicio de sesion - Exitoso');
-        window.location.href = 'home.html';
+        window.location.href = 'homeAccounts.html';
     } else {
         alert('Usuario o contraseña incorrectos');
     }
@@ -23,15 +23,20 @@ function signup(event) {
     event.preventDefault();
     const username = document.getElementById('new-username').value;
     const password = document.getElementById('new-password').value;
-
-    if (username && password) {
-        users.push({ username, password });
-        localStorage.setItem('users', JSON.stringify(users));
-        limpiarReportes();
-        agregarReporte('Registro de usuario exitoso para el usuario ' + username, 'Registro de usuario - Exitoso');
-        window.location.href = 'home.html';
+    var exist = users.find(user => user.username === username);
+    if (!exist) {
+        if (username && password) {
+            const userSessionId = btoa(username);
+            users.push({ username, password, userSessionId});
+            localStorage.setItem('users', JSON.stringify(users));
+            limpiarReportes();
+            agregarReporte('Registro de usuario exitoso para el usuario ' + username, 'Registro de usuario - Exitoso');
+            window.location.href = 'homeAccounts.html';
+        } else {
+            alert('Por favor, complete todos los campos');
+        }
     } else {
-        alert('Por favor, complete todos los campos');
+        alert('Nombre usuario ya se encuentra registrado');
     }
 }
 

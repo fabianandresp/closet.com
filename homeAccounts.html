@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selector de Cuentas</title>
+    <link rel="stylesheet" href="CSS/accounts.css">
+</head>
+<body>
+    <div class="container">
+        <h1>¿Algún outfit en especial?</h1>
+        <div class="profiles">
+            <!-- Ejemplo de perfil predeterminado -->
+            <div class="profile" data-session="1">
+                <img src="images/icons/logo.jpg" alt="Perfil 1">
+                <input type="text" value="Perfil 1" class="profile-name" data-profile="1">
+                <button class="delete-profile">Eliminar</button>
+            </div>
+            <!-- Botón para agregar nuevos perfiles -->
+            <div class="profile" data-session="add">
+                <img src="images/icons/+.png" alt="Añadir Perfil">
+                <p>Añadir Perfil</p>
+            </div>
+        </div>
+    </div>
+    <script src="JavaScript/accounts.js"></script>
+</body>
+</html>

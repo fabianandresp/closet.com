@@ -1,0 +1,91 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #141414;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+.profiles {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap; /* Permite que los perfiles adicionales se alineen correctamente */
+}
+
+.profile {
+    width: 200px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+    position: relative;
+}
+
+.profile img {
+    width: 100%;
+    border-radius: 10%;
+}
+
+.profile input {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    width: 100%;
+    padding: 8px;
+    background-color: #282828;
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: #fff;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.profile input:focus {
+    outline: none;
+    background-color: #333;
+    border-color: #fff;
+    transform: scale(1.05);
+}
+
+.profile:hover {
+    transform: scale(1.1);
+}
+
+.profile-add {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    color: #ccc;
+    text-align: center;
+}
+
+/* Estilo para el botón de eliminación */
+.delete-profile {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #ff4d4d;
+    border: none;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+    display: none; /* Inicialmente oculto */
+}
+
+.profile:hover .delete-profile {
+    display: block; /* Mostrar el botón solo al hacer hover */
+}
