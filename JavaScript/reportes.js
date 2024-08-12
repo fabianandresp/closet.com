@@ -9,8 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     reportes.forEach(reporte => {
         const nuevoReporte = document.createElement('tr');
+        const usuarioActivo = `${loggedInUser}.${perfilActivo}`;
         nuevoReporte.innerHTML = `
             <td>${reporte.id}</td>
+            <td>${usuarioActivo}</td>
             <td>${reporte.tipo}</td>
             <td>${reporte.mensaje}</td>
             <td>${reporte.fecha}</td>
