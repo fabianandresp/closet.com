@@ -62,6 +62,7 @@ export function renderOutfitSummary() {
       const outfitName = document.querySelector('.js-outfit-name').value;
 
       addToClosetSaved(prendaIds, outfitName);
+      agregarReporte('Outfit ' + outfitName + ' guardado correctamente', 'Guardar Outfit');
       closet.forEach((closetItem) => {
         const prendaId = closetItem.id;
         removeFromCloset(prendaId);
@@ -69,4 +70,13 @@ export function renderOutfitSummary() {
     });
   });
 
+}
+
+/*FUNCION PARA AGREGAR REPORTES*/
+function agregarReporte(mensaje, tipo) {
+  let reportes = JSON.parse(localStorage.getItem('reportes')) || [];
+  let id = reportes.length + 1;
+  let fecha = new Date().toLocaleString();
+  reportes.push({ id, tipo, mensaje, fecha });
+  localStorage.setItem('reportes', JSON.stringify(reportes));
 }
