@@ -1,8 +1,11 @@
 const loggedInUser = localStorage.getItem('loggedInUser');
 
 document.addEventListener('DOMContentLoaded', () => {
+    const perfilActivo = localStorage.getItem('perfilActivo');
     const reportesDiv = document.getElementById('reportes-list');
     let reportes = JSON.parse(localStorage.getItem('reportes')) || [];
+
+    reportes = reportes.filter(reporte => reporte.perfil === perfilActivo);
 
     reportes.forEach(reporte => {
         const nuevoReporte = document.createElement('tr');
@@ -21,11 +24,27 @@ let isVisibleInicio = false;
 document.querySelector("[boton-inicio]").addEventListener("click", e => {
   if (!isVisibleInicio) {
     document.querySelector("[boton-inicio]").classList.add("menu-botones-medio-onclick");
-    agregarReporte(loggedInUser + ' cambio de pestaña a inicio','Cambio de pestaña');
+    agregarReporte(loggedInUser + ' cambio de pestaña a inicio', 'Cambio de pestaña');
     location.href = "/home.html";
   } else {
     document.querySelector("[boton-inicio]").classList.add("menu-botones-medio");
-    agregarReporte(loggedInUser + ' cambio de pestaña a inicio','Cambio de pestaña');
+    agregarReporte(loggedInUser + ' cambio de pestaña a inicio', 'Cambio de pestaña');
     location.href = "/home.html";
   }
 });
+
+function agregarReporte(mensaje, tipo) {
+  const perfilActivo = localStorage.getItem('perfilActivo');
+  let reportes = JSON.parse(localStorage.getItem('reportes')) || [];
+
+  const nuevoReporte = {
+      id: reportes.length + 1,
+      tipo: tipo,
+      mensaje: mensaje,
+      fecha: new Date().toLocaleString(),
+      perfil: perfilActivo
+  };
+
+  reportes.push(nuevoReporte);
+  localStorage.setItem('reportes', JSON.stringify(reportes));
+}

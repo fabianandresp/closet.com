@@ -72,11 +72,19 @@ export function renderOutfitSummary() {
 
 }
 
-/*FUNCION PARA AGREGAR REPORTES*/
+
 function agregarReporte(mensaje, tipo) {
+  const perfilActivo = localStorage.getItem('perfilActivo');
   let reportes = JSON.parse(localStorage.getItem('reportes')) || [];
-  let id = reportes.length + 1;
-  let fecha = new Date().toLocaleString();
-  reportes.push({ id, tipo, mensaje, fecha });
+
+  const nuevoReporte = {
+      id: reportes.length + 1,
+      tipo: tipo,
+      mensaje: mensaje,
+      fecha: new Date().toLocaleString(),
+      perfil: perfilActivo
+  };
+
+  reportes.push(nuevoReporte);
   localStorage.setItem('reportes', JSON.stringify(reportes));
 }

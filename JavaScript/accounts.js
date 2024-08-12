@@ -17,6 +17,12 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll('.profile img').forEach(img => {
         img.addEventListener('click', (event) => {
             const sessionId = event.target.parentElement.dataset.session;
+
+            const profileName = localStorage.getItem(`profileName_${sessionId}`);
+            
+            // Guardar el perfil activo en localStorage
+            localStorage.setItem('perfilActivo', profileName || `Perfil ${sessionId}`);
+
             if (sessionId === 'add') {
                 addNewProfile();
             } else {
