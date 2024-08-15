@@ -1,3 +1,5 @@
+import { getPrenda } from "../../data/ropa.js";
+
 export let closet = []; // Inicializa closet como un array vacío
 
 loadFromStorage();
@@ -42,4 +44,31 @@ export function removeFromCloset(prendaId) {
 
   closet = newCart;
   saveToStorage();
+}
+
+
+export function checkCloset(prendaId) {
+  let isInCloset = false;
+  let hasTipoRopa = false;
+
+  
+
+  closet.forEach((closetItem) => {
+    const matchingPrenda = getPrenda(prendaId);
+
+    if (parseInt(closetItem.id) === parseInt(prendaId)) {
+      isInCloset = true;
+    }
+    console.log(matchingPrenda.tipoRopaId);
+
+    if (parseInt(matchingPrenda.tipoRopaId) == parseInt(1)) { // Si hay una prenda con tipoRopa === 1
+
+      hasTipoRopa = true;
+    }
+  });
+
+  return {
+    isInCloset: isInCloset,
+    hasTipoRopa: hasTipoRopa
+  };
 }

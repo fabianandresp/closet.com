@@ -1,5 +1,5 @@
 import { loadFromStorage, addTo, prendas, removeFromPrendas, getPrenda } from "../data/ropa.js";
-import { closet, addToCloset } from "../data/closet.js";
+import { closet, addToCloset, checkCloset } from "../data/closet.js";
 let idPrenda = 0;
 
 let listaPrendasOriginal = JSON.parse(localStorage.getItem("prendas"));
@@ -217,7 +217,7 @@ function displayClothingItems(listaPrendas) {
           <div class="prenda-spacer"></div>
 
           <button class="add-button js-add-to-closet"
-          data-prenda-id="${prenda.id}">
+          data-prenda-id="${prenda.id}" data-prenda-tipo="${prenda.tipoRopaId}">
             Añadir
           </button>
 
@@ -258,8 +258,21 @@ function displayClothingItems(listaPrendas) {
   document.querySelectorAll('.js-add-to-closet').forEach((button) => {
     button.addEventListener('click', () => {
       const prendaId = button.dataset.prendaId;
-      addToCloset(prendaId);
-      updateClosetQuantity();
+      const prendaTipo = button.dataset.prendaTipo;
+      
+      const closetStatus = checkCloset(prendaId);
+      console.log(prendaTipo);
+      if (closetStatus.hasTipoRopa) {
+        alert("Ya existe un par de zapatos en el closet");
+        console.log('dsdsds' + prendaTipo);
+      } else if (closetStatus.isInCloset) {
+        alert("La prenda ya está en el closet.");
+      }  else {
+        addToCloset(prendaId);
+        updateClosetQuantity();
+      }
+
+      
     });
   });
 
@@ -325,7 +338,7 @@ function displayClothingItems(listaPrendas) {
       const prendaFavoritos = link.dataset.prendaFavoritos;
       const prendaTipo = link.dataset.prendaTipo;
 
-      console.log(prendaFavoritos);
+      //console.log(prendaTipo);
 
       let fav;
 
