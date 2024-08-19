@@ -1,16 +1,25 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Cargar nombres de perfiles desde localStorage
-    document.querySelectorAll('.profile-name').forEach(input => {
-        const profileKey = `profileName_${input.dataset.profile}`;
-        const savedName = localStorage.getItem(profileKey);
-        if (savedName) {
-            input.value = savedName;
-        }
+    const profilesKey = 'profilesData'; // Clave para almacenar el array de perfiles en localStorage
 
-        // Guardar el nombre del perfil en localStorage cuando se edite
-        input.addEventListener('input', (event) => {
-            localStorage.setItem(profileKey, event.target.value);
-        });
+    // Función para cargar perfiles desde localStorage
+    function loadProfiles() {
+        const profiles = localStorage.getItem(profilesKey);
+        return profiles ? JSON.parse(profiles) : [];
+    }
+
+    // Función para guardar perfiles en localStorage
+    function saveProfiles(profiles) {
+        localStorage.setItem(profilesKey, JSON.stringify(profiles));
+    }
+
+    // Cargar perfiles existentes
+    const profilesData = loadProfiles();
+
+    // Inicializar la interfaz con los perfiles existentes
+    profilesData.forEach(profile => {
+        if (profile.sessionId !== 'add') {
+            renderProfile(profile);
+        }
     });
 
     // Hacer las imágenes clicables
@@ -18,53 +27,71 @@ document.addEventListener("DOMContentLoaded", () => {
         img.addEventListener('click', (event) => {
             const sessionId = event.target.parentElement.dataset.session;
 
-            const profileName = localStorage.getItem(`profileName_${sessionId}`);
-            
-            // Guardar el perfil activo en localStorage
-            localStorage.setItem('perfilActivo', profileName || `Perfil ${sessionId}`);
-
             if (sessionId === 'add') {
                 addNewProfile();
             } else {
-                window.location.href = 'home.html';//`session${sessionId}.html`; // Redirige a la sesión correspondiente.
+                // Guardar el perfil activo en localStorage
+                localStorage.setItem('perfilActivo', sessionId);
+
+                // Redirigir a home.html
+                window.location.href = 'home.html';
             }
         });
     });
 
     // Función para añadir un nuevo perfil
     function addNewProfile() {
+        const newProfileId = Date.now().toString(); // Generar un ID único basado en la fecha actual
+        const newProfile = {
+            sessionId: newProfileId,
+            name: 'Nuevo Perfil',
+            prendas: [] // Array para almacenar las prendas asociadas al perfil
+        };
+
+        profilesData.push(newProfile); // Añadir el nuevo perfil al array
+        saveProfiles(profilesData); // Guardar el array actualizado en localStorage
+        renderProfile(newProfile); // Renderizar el nuevo perfil en la interfaz
+    }
+
+    // Función para renderizar un perfil en la interfaz
+    function renderProfile(profile) {
         const profilesContainer = document.querySelector('.profiles');
         const addProfileElement = document.querySelector('.profile[data-session="add"]');
-        const newProfileId = profilesContainer.children.length; // Asigna un ID único basado en la cantidad de perfiles
-        const newProfileHTML = `
-            <div class="profile" data-session="${newProfileId}">
-                <img src="images/icons/logo.jpg" alt="Perfil ${newProfileId}">
-                <input type="text" value="Nuevo Perfil" class="profile-name" data-profile="${newProfileId}">
+        const profileHTML = `
+            <div class="profile" data-session="${profile.sessionId}">
+                <img src="images/icons/logo.jpg" alt="${profile.name}">
+                <input type="text" value="${profile.name}" class="profile-name" data-profile="${profile.sessionId}">
                 <button class="delete-profile">Eliminar</button>
             </div>
         `;
 
         // Inserta el nuevo perfil antes del perfil de "Añadir Perfil"
-        addProfileElement.insertAdjacentHTML('beforebegin', newProfileHTML);
+        addProfileElement.insertAdjacentHTML('beforebegin', profileHTML);
 
         // Agregar eventos al nuevo perfil
-        const newProfileElement = profilesContainer.querySelector(`.profile[data-session="${newProfileId}"]`);
-        newProfileElement.querySelector('img').addEventListener('click', () => {
-            window.location.href = `session${newProfileId}.html`;
-        });
+        const newProfileElement = profilesContainer.querySelector(`.profile[data-session="${profile.sessionId}"]`);
         const newInputElement = newProfileElement.querySelector('input');
         newInputElement.addEventListener('input', (event) => {
-            localStorage.setItem(`profileName_${newProfileId}`, event.target.value);
+            profile.name = event.target.value;
+            saveProfiles(profilesData);
+        });
+        newProfileElement.querySelector('img').addEventListener('click', () => {
+            localStorage.setItem('perfilActivo', profile.sessionId);
+            window.location.href = 'home.html';
         });
         newProfileElement.querySelector('.delete-profile').addEventListener('click', (event) => {
-            deleteProfile(newProfileElement, newProfileId);
+            deleteProfile(newProfileElement, profile.sessionId);
         });
     }
 
     // Función para eliminar un perfil
     function deleteProfile(profileElement, profileId) {
         profileElement.remove();
-        localStorage.removeItem(`profileName_${profileId}`);
+        const index = profilesData.findIndex(profile => profile.sessionId === profileId);
+        if (index !== -1) {
+            profilesData.splice(index, 1);
+            saveProfiles(profilesData);
+        }
     }
 
     // Agregar eventos de eliminación a los perfiles existentes

@@ -1,20 +1,17 @@
 import { loadFromStorage, addTo, prendas, removeFromPrendas, getPrenda } from "../data/ropa.js";
 import { closet, addToCloset, checkCloset } from "../data/closet.js";
 let idPrenda = 0;
-
 let listaPrendasOriginal = JSON.parse(localStorage.getItem("prendas"));
-
 let listaPrendasBusqueda = [];
 
 const loggedInUser = localStorage.getItem('loggedInUser');
-
+const userSessionId = loggedInUser ? loggedInUser.userSessionId : null;
 const botonBuscar = document.getElementById('js-boton-buscar');
 botonBuscar.addEventListener("click", filtrar);
 
 displayClothingItems(listaPrendasOriginal);
 
 //Obtener datos de busqueda de filtros e input bar
-
 
 function filtrar() {
 
@@ -134,9 +131,6 @@ function filtrar() {
 
 }
 
-
-
-
 function ropaTipoId(idOrName) {
   switch (idOrName) {
     case 1:
@@ -177,15 +171,14 @@ let listaPrendas = [];
 
 function displayClothingItems(listaPrendas) {
 
-
   //const clothingArray = JSON.parse(localStorage.getItem("prendas")) || [];
-
   const clothingContainer = document.querySelector(".prenda-grid");
   clothingContainer.innerHTML = ``;
   //let prendasHTML = '';
   console.log(listaPrendas);
   if (listaPrendas) {
     listaPrendas.forEach(prenda => {
+      if (prenda.usuarioId == localStorage.getItem('perfilActivo')){
       //const prendaId = prenda.id;
 
       //const matchingPrenda = getPrenda(prendaId);
@@ -239,9 +232,10 @@ function displayClothingItems(listaPrendas) {
         `;
       clothingContainer.appendChild(div);
 
-
-    });
+      
+    }});
   }
+  
 
   //Boton de ingresar al "carrito"
   function updateClosetQuantity() {
@@ -370,7 +364,7 @@ function displayClothingItems(listaPrendas) {
             estado: document.getElementById("estado").value || prendaEstado,
             temporada: document.getElementById("temporada").value || prendaTemporada,
             tipoRopaId: document.getElementById("tipo").value || prendaTipo,
-            usuarioId: 1,
+            usuarioId: localStorage.getItem('perfilActivo'),
             favoritos: prendaFavoritos // Mantener el estado de favoritos original
           };
           
@@ -415,7 +409,7 @@ function displayClothingItems(listaPrendas) {
             estado: document.getElementById("estado").value || prendaEstado,
             temporada: document.getElementById("temporada").value || prendaTemporada,
             tipoRopaId: document.getElementById("tipo").value || prendaTipo,
-            usuarioId: 1,
+            usuarioId: localStorage.getItem('perfilActivo'),
             favoritos: fav // Mantener el estado de favoritos original
           };
 
@@ -445,15 +439,11 @@ function displayClothingItems(listaPrendas) {
     });
   });
 
-
-
   // Funcionalidad para el formulario modal
   const modal = document.getElementById("myModal");
   const btn = document.getElementById("openFormButton");
   const span = document.getElementsByClassName("close")[0];
   const form = document.getElementById("clothingForm");
-
-
 
   btn.onclick = function () {
     document.querySelector(".titleText").innerText = "Agregar Prenda";
@@ -498,9 +488,6 @@ function displayClothingItems(listaPrendas) {
 
       }
 
-
-
-
       const formData = {
         id: idPrenda,
         image: reader.result,
@@ -508,7 +495,7 @@ function displayClothingItems(listaPrendas) {
         estado: document.getElementById("estado").value,
         temporada: document.getElementById("temporada").value,
         tipoRopaId: document.getElementById("tipo").value,
-        usuarioId: 1,
+        usuarioId: localStorage.getItem('perfilActivo'),
         favoritos: 0
       };
 
@@ -538,8 +525,6 @@ function displayClothingItems(listaPrendas) {
 
 }
 
-
-
 document.querySelector("[boton-inicio]").addEventListener("click", e => {
   if (document.querySelector("[boton-inicio]").classList.contains("menu-botones-medio-onclick")) {
 
@@ -553,7 +538,6 @@ document.querySelector("[boton-inicio]").addEventListener("click", e => {
     location.href = "./home.html";
   }
 })
-
 
 //updateHeartIcons();
 loadFromStorage();
