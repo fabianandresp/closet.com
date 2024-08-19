@@ -11,6 +11,19 @@ export function renderOutfitSummary() {
   // Agrupar por groupId
   sortedCloset.forEach((closetItem) => {
 
+    let veri = false
+
+    closetItem.prendaId.forEach((id) => {
+      const matchingPrenda = getPrenda(id);
+      if (matchingPrenda.usuarioId == localStorage.getItem('perfilActivo')) {
+        veri = true;
+      }
+    });
+
+    console.log(veri);
+
+    if (veri === true){
+
     groupNameMap.set(closetItem.groupId, closetItem.groupName);
 
     outfitSummaryHTML += `
@@ -27,8 +40,10 @@ export function renderOutfitSummary() {
     // Recorrer prendaId para obtener cada prenda dentro del grupo
     closetItem.prendaId.forEach((id) => {
       const matchingPrenda = getPrenda(id);
+      //if (matchingPrenda.usuarioId == localStorage.getItem('perfilActivo')) {
 
-      outfitSummaryHTML += `
+
+        outfitSummaryHTML += `
         <div class="closetSaved-item-container
           js-closetSaved-item-container 
           js-closetSaved-item-container-${matchingPrenda.id}">
@@ -41,12 +56,20 @@ export function renderOutfitSummary() {
           </div>
         </div>
       `;
+
+      //}
     });
 
     outfitSummaryHTML += `  
         </div> <!-- Cierre de outfit-group -->
       </div> <!-- Cierre de outfit-group-container -->  
     `;
+
+  }
+  else {
+    outfitSummaryHTML += `  
+    `;
+  }
   });
 
   document.querySelector('.js-outfit-closet')
@@ -76,11 +99,11 @@ function agregarReporte(mensaje, tipo) {
   let reportes = JSON.parse(localStorage.getItem('reportes')) || [];
 
   const nuevoReporte = {
-      id: reportes.length + 1,
-      tipo: tipo,
-      mensaje: mensaje,
-      fecha: new Date().toLocaleString(),
-      perfil: perfilActivo
+    id: reportes.length + 1,
+    tipo: tipo,
+    mensaje: mensaje,
+    fecha: new Date().toLocaleString(),
+    perfil: perfilActivo
   };
 
   reportes.push(nuevoReporte);
