@@ -1,4 +1,4 @@
-import { getPrenda } from "../../data/ropa.js";
+import { getPrenda } from "./ropa.js";
 
 export let closet = []; // Inicializa closet como un array vacío
 
