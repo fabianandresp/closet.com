@@ -11,7 +11,6 @@ function login(event) {
     if (user) {
         localStorage.setItem('loggedInUser', username);
         limpiarReportes();
-        agregarReporte('Inicio de sesion exitoso para el usuario ' + username, 'Inicio de sesion - Exitoso');
         window.location.href = 'homeAccounts.html';
     } else {
         alert('Usuario o contraseña incorrectos');
@@ -32,7 +31,6 @@ function signup(event) {
                 localStorage.setItem('users', JSON.stringify(users));
                 localStorage.setItem('loggedInUser', userSessionId);
                 limpiarReportes();
-                agregarReporte('Registro de usuario exitoso para el usuario ' + username, 'Registro de usuario - Exitoso');
                 window.location.href = 'homeAccounts.html';
             } else {
                 alert('La contraseña debe tener al menos 8 caracteres, una letra mayúscula y un carácter especial');
