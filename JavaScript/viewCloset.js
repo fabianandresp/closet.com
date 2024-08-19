@@ -2,6 +2,7 @@ import { getPrenda } from "../../data/ropa.js";
 import { closetSaved, removeFromClosetSaved } from "../../data/closetSaved.js";
 
 let outfitSummaryHTML = ``;
+const groupNameMap = new Map();
 
 export function renderOutfitSummary() {
   // Ordenar closetSaved por groupId
@@ -9,6 +10,9 @@ export function renderOutfitSummary() {
 
   // Agrupar por groupId
   sortedCloset.forEach((closetItem) => {
+
+    groupNameMap.set(closetItem.groupId, closetItem.groupName);
+
     outfitSummaryHTML += `
       <div class="outfit-group-container js-outfit-group-container-${closetItem.groupId}">
         <h3>Nombre: ${closetItem.groupName}</h3>
@@ -53,14 +57,32 @@ export function renderOutfitSummary() {
     .forEach((link) => {
       link.addEventListener('click', () => {
         const groupId = link.dataset.groupId;
+        const groupName = groupNameMap.get(groupId);
         removeFromClosetSaved(groupId);
 
         const container = document.querySelector(
           `.js-outfit-group-container-${groupId}`
         );
         container.remove();
+        agregarReporte(`Outfit ${groupName} eliminado correctamente`, 'Eliminar Outfit')
       });
     });
 }
 
 renderOutfitSummary();
+
+function agregarReporte(mensaje, tipo) {
+  const perfilActivo = localStorage.getItem('perfilActivo');
+  let reportes = JSON.parse(localStorage.getItem('reportes')) || [];
+
+  const nuevoReporte = {
+      id: reportes.length + 1,
+      tipo: tipo,
+      mensaje: mensaje,
+      fecha: new Date().toLocaleString(),
+      perfil: perfilActivo
+  };
+
+  reportes.push(nuevoReporte);
+  localStorage.setItem('reportes', JSON.stringify(reportes));
+}
