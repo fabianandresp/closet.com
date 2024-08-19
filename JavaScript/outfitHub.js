@@ -545,12 +545,12 @@ document.querySelector("[boton-inicio]").addEventListener("click", e => {
 
     document.querySelector("[boton-inicio]").classList.remove("menu-botones-medio-onclick");
     agregarReporte(loggedInUser + ' cambio de pestaña a inicio', 'Cambio de pestaña');
-    location.href = "/home.html";
+    location.href = "./home.html";
 
   } else {
     document.querySelector("[boton-inicio]").classList.add("menu-botones-medio-onclick");
     agregarReporte(loggedInUser + ' cambio de pestaña a inicio', 'Cambio de pestaña');
-    location.href = "/home.html";
+    location.href = "./home.html";
   }
 })
 
@@ -566,12 +566,12 @@ document.querySelector("[boton-reportes]").addEventListener("click", e => {
     isVisibleReportes = true;
     document.querySelector("[boton-reportes]").classList.add("menu-botones-medio-onclick");
     agregarReporte(loggedInUser + ' cambio de pestaña a reportes', 'Cambio de pestaña');
-    location.href = "/homeReportes.html";
+    location.href = "./homeReportes.html";
   } else {
     isVisibleReportes = false;
     document.querySelector("[boton-reportes]").classList.add("menu-botones-medio");
     agregarReporte(loggedInUser + ' ambio de pestaña a reportes', 'Cambio de pestaña');
-    location.href = "/homeReportes.html";
+    location.href = "./homeReportes.html";
   }
 })
 
