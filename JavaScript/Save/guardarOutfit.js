@@ -1,5 +1,5 @@
 import { closet, removeFromCloset } from "../../data/closet.js";
-import { getPrenda } from "../../data/ropa.js";
+import { getPrenda, saveToStorage } from "../../data/ropa.js";
 import { addToClosetSaved } from "../../data/closetSaved.js";
 
 let outfitSummaryHTML = `
@@ -60,6 +60,14 @@ export function renderOutfitSummary() {
     button.addEventListener('click', () => {
       const prendaIds = closet.map(item => item.id);
       const outfitName = document.querySelector('.js-outfit-name').value;
+
+      // Sumar +1 al uso de cada prenda
+      prendaIds.forEach((prendaId) => {
+        const prenda = getPrenda(prendaId);
+        prenda.usos += 1;
+        saveToStorage();
+        agregarReporte("La prenda " + prenda.nombre + " se ha utilizado en " + prenda.usos + " outfit(s)", 'Usos de Prenda');
+      });
 
       addToClosetSaved(prendaIds, outfitName);
       agregarReporte('Outfit ' + outfitName + ' guardado correctamente', 'Guardar Outfit');
