@@ -496,7 +496,8 @@ function displayClothingItems(listaPrendas) {
         temporada: document.getElementById("temporada").value,
         tipoRopaId: document.getElementById("tipo").value,
         usuarioId: localStorage.getItem('perfilActivo'),
-        favoritos: 0
+        favoritos: 0,
+        usos: 0
       };
 
       addTo(formData);

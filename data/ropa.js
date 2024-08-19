@@ -11,7 +11,7 @@ export function loadFromStorage() {
 }
 
 
-function saveToStorage () {
+export function saveToStorage () {
   localStorage.setItem('prendas', JSON.stringify(prendas) );
 }
 
