@@ -26,12 +26,17 @@ function signup(event) {
     var exist = users.find(user => user.username === username);
     if (!exist) {
         if (username && password) {
-            const userSessionId = btoa(username);
-            users.push({ username, password, userSessionId});
-            localStorage.setItem('users', JSON.stringify(users));
-            limpiarReportes();
-            agregarReporte('Registro de usuario exitoso para el usuario ' + username, 'Registro de usuario - Exitoso');
-            window.location.href = 'homeAccounts.html';
+            if (validarContraseña(password)) {
+                const userSessionId = btoa(username);
+                users.push({ username, password, userSessionId });
+                localStorage.setItem('users', JSON.stringify(users));
+                localStorage.setItem('loggedInUser', userSessionId);
+                limpiarReportes();
+                agregarReporte('Registro de usuario exitoso para el usuario ' + username, 'Registro de usuario - Exitoso');
+                window.location.href = 'homeAccounts.html';
+            } else {
+                alert('La contraseña debe tener al menos 8 caracteres, una letra mayúscula y un carácter especial');
+            }
         } else {
             alert('Por favor, complete todos los campos');
         }
@@ -92,4 +97,17 @@ function agregarReporte(mensaje, tipo) {
 /*FUNCION PARA LIMPIAR REPORTES*/
 function limpiarReportes() {
     localStorage.removeItem('reportes');
+}
+
+function validarContraseña(contraseña) {
+    // Expresión regular para validar la contraseña
+    const longitudMinima = 8;
+    const tieneMayuscula = /[A-Z]/.test(contraseña);
+    const tieneCaracterEspecial = /[!@#$%^&*(),.?":{}|<>]/.test(contraseña);
+
+    if (contraseña.length >= longitudMinima && tieneMayuscula && tieneCaracterEspecial) {
+        return true;
+    } else {
+        return false;
+    }
 }

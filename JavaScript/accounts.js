@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Inicializar la interfaz con los perfiles existentes
     profilesData.forEach(profile => {
-        if (profile.sessionId !== 'add') {
+        if (profile.sessionId !== 'add' && profile.mainSessionId == localStorage.getItem('loggedInUser')) {
             renderProfile(profile);
         }
     });
@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const newProfile = {
             sessionId: newProfileId,
             name: 'Nuevo Perfil',
+            mainSessionId: localStorage.getItem('loggedInUser'),
             prendas: [] // Array para almacenar las prendas asociadas al perfil
         };
 
