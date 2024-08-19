@@ -55,13 +55,14 @@ export function checkCloset(prendaId) {
 
   closet.forEach((closetItem) => {
     const matchingPrenda = getPrenda(prendaId);
+    const matchingPrenda2 = getPrenda(closetItem.id);
 
     if (parseInt(closetItem.id) === parseInt(prendaId)) {
       isInCloset = true;
     }
     console.log(matchingPrenda.tipoRopaId);
-
-    if (parseInt(matchingPrenda.tipoRopaId) == parseInt(1)) { // Si hay una prenda con tipoRopa === 1
+    console.log(matchingPrenda2.tipoRopaId);
+    if (parseInt(matchingPrenda.tipoRopaId) == parseInt(matchingPrenda2.tipoRopaId)) { // Si hay una prenda con tipoRopa === 1
 
       hasTipoRopa = true;
     }
