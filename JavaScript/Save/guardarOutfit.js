@@ -61,6 +61,23 @@ export function renderOutfitSummary() {
       const prendaIds = closet.map(item => item.id);
       const outfitName = document.querySelector('.js-outfit-name').value;
 
+      // Incrementar el campo 'usos' para cada prenda en el closet
+      prendaIds.forEach(prendaId => {
+        // Obtener la prenda del localStorage
+        let prendas = JSON.parse(localStorage.getItem('prendas')) || [];
+        let prenda = prendas.find(p => p.id === prendaId);
+
+        if (prenda) {
+          // Incrementar el contador de usos
+          prenda.usos = (prenda.usos || 0) + 1;
+
+          // Guardar los cambios en el localStorage
+          localStorage.setItem('prendas', JSON.stringify(prendas));
+
+          agregarReporte(`Prenda "${prenda.nombre}" se ha utilizado en ${prenda.usos} outfits`, 'Actualización de usos');
+        }
+      });
+
       addToClosetSaved(prendaIds, outfitName);
       agregarReporte('Outfit ' + outfitName + ' guardado correctamente', 'Guardar Outfit');
       closet.forEach((closetItem) => {
