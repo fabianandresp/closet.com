@@ -1,5 +1,5 @@
-import { getPrenda } from "../../data/ropa.js";
-import { closetSaved, removeFromClosetSaved } from "../../data/closetSaved.js";
+import { getPrenda } from "../data/ropa.js";
+import { closetSaved, removeFromClosetSaved } from "../data/closetSaved.js";
 
 let outfitSummaryHTML = ``;
 const groupNameMap = new Map();
