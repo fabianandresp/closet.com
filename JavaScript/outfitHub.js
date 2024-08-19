@@ -1,5 +1,5 @@
 import { loadFromStorage, addTo, prendas, removeFromPrendas, getPrenda } from "../data/ropa.js";
-import { closet, addToCloset } from "../data/closet.js";
+import { closet, addToCloset, checkCloset } from "../data/closet.js";
 let idPrenda = 0;
 
 let listaPrendasOriginal = JSON.parse(localStorage.getItem("prendas"));
@@ -155,16 +155,16 @@ function ropaTipoId(idOrName) {
   }
 }
 
-function updateHeartIcons() {
+function updateHeartIcons(fav) {
   document.querySelectorAll('.js-corazon').forEach(button => {
     const prendaId = button.dataset.prendaId;
     const prenda = listaPrendasOriginal.find(prenda => prenda.id == prendaId);
 
     if (prenda) {
       const icon = button.querySelector('i');
-      if (prenda.favoritos === 1) {
+      if (fav === 1) {
         icon.style.color = 'red';
-      } else if (prenda.favoritos === 0) {
+      } else if (fav === 0) {
         icon.style.color = 'grey';
       }
     }
@@ -217,7 +217,7 @@ function displayClothingItems(listaPrendas) {
           <div class="prenda-spacer"></div>
 
           <button class="add-button js-add-to-closet"
-          data-prenda-id="${prenda.id}">
+          data-prenda-id="${prenda.id}" data-prenda-tipo="${prenda.tipoRopaId}">
             Añadir
           </button>
 
@@ -258,8 +258,21 @@ function displayClothingItems(listaPrendas) {
   document.querySelectorAll('.js-add-to-closet').forEach((button) => {
     button.addEventListener('click', () => {
       const prendaId = button.dataset.prendaId;
-      addToCloset(prendaId);
-      updateClosetQuantity();
+      const prendaTipo = button.dataset.prendaTipo;
+      
+      const closetStatus = checkCloset(prendaId);
+      console.log(prendaTipo);
+      if (closetStatus.hasTipoRopa) {
+        alert("Ya existe un par de zapatos en el closet");
+        console.log('dsdsds' + prendaTipo);
+      } else if (closetStatus.isInCloset) {
+        alert("La prenda ya está en el closet.");
+      }  else {
+        addToCloset(prendaId);
+        updateClosetQuantity();
+      }
+
+      
     });
   });
 
@@ -325,8 +338,11 @@ function displayClothingItems(listaPrendas) {
       const prendaFavoritos = link.dataset.prendaFavoritos;
       const prendaTipo = link.dataset.prendaTipo;
 
-      console.log(prendaFavoritos);
+      //console.log(prendaTipo);
 
+      let fav;
+
+      
 
       // Rellenar los campos del formulario con los datos actuales
       document.getElementById("nombre").value = prendaNombre;
@@ -357,7 +373,7 @@ function displayClothingItems(listaPrendas) {
             usuarioId: 1,
             favoritos: prendaFavoritos // Mantener el estado de favoritos original
           };
-          console.log(prendaFavoritos);
+          
 
           if (container) {
             container.remove();
@@ -378,6 +394,17 @@ function displayClothingItems(listaPrendas) {
           displayClothingItems(listaPrendasOriginal);
         }
 
+        console.log('HOLAAAA'+prendaFavoritos);
+
+        if (prendaFavoritos == 1) {
+          fav =1;
+        }else {
+          fav =0;
+        }
+
+        console.log('HOLAAAA'+fav);
+
+
         if (file) {
           reader.readAsDataURL(file);
         } else {
@@ -389,7 +416,7 @@ function displayClothingItems(listaPrendas) {
             temporada: document.getElementById("temporada").value || prendaTemporada,
             tipoRopaId: document.getElementById("tipo").value || prendaTipo,
             usuarioId: 1,
-            favoritos: prendaFavoritos // Mantener el estado de favoritos original
+            favoritos: fav // Mantener el estado de favoritos original
           };
 
           if (container) {
@@ -405,13 +432,14 @@ function displayClothingItems(listaPrendas) {
           const index = listaPrendasOriginal.findIndex(prenda => prenda.id == prendaId);
           if (index !== -1) {
             listaPrendasOriginal[index] = formData;
+            updateHeartIcons(fav);
           } else {
             listaPrendasOriginal.push(formData);
           }
 
           agregarReporte('Prenda ' + listaPrendasOriginal[index].nombre + ' editada correctamente', 'Editar Prenda');
           displayClothingItems(listaPrendasOriginal);
-          updateHeartIcons();
+          
         }
       }
     });
@@ -527,7 +555,7 @@ document.querySelector("[boton-inicio]").addEventListener("click", e => {
 })
 
 
-updateHeartIcons();
+//updateHeartIcons();
 loadFromStorage();
 displayClothingItems(listaPrendasOriginal);
 
