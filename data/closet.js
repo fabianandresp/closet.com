@@ -60,12 +60,15 @@ export function checkCloset(prendaId) {
     if (parseInt(closetItem.id) === parseInt(prendaId)) {
       isInCloset = true;
     }
-    console.log(matchingPrenda.tipoRopaId);
-    console.log(matchingPrenda2.tipoRopaId);
-    if (parseInt(matchingPrenda.tipoRopaId) == parseInt(matchingPrenda2.tipoRopaId)) { // Si hay una prenda con tipoRopa === 1
+    console.log("fsfsfs"+matchingPrenda.tipoRopaId);
+    console.log("ffsgsgs"+matchingPrenda2.tipoRopaId);
+    if(parseInt(matchingPrenda.tipoRopaId) == 1) {
+      if (parseInt(matchingPrenda2.tipoRopaId) == 1) { // Si hay una prenda con tipoRopa === 1
 
-      hasTipoRopa = true;
+        hasTipoRopa = true;
+      }
     }
+    
   });
 
   return {
