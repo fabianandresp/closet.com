@@ -10,6 +10,7 @@ function login(event) {
     const user = users.find(user => user.username === username && user.password === password);
     if (user) {
         localStorage.setItem('loggedInUser', username);
+        localStorage.setItem('loggedInUserName', username);
         limpiarReportes();
         window.location.href = 'homeAccounts.html';
     } else {
@@ -30,6 +31,7 @@ function signup(event) {
                 users.push({ username, password, userSessionId });
                 localStorage.setItem('users', JSON.stringify(users));
                 localStorage.setItem('loggedInUser', userSessionId);
+                localStorage.setItem('loggedInUserName', username);
                 limpiarReportes();
                 window.location.href = 'homeAccounts.html';
             } else {

@@ -1,24 +1,31 @@
-const loggedInUser = localStorage.getItem('loggedInUser');
+const loggedInUser = localStorage.getItem('loggedInUserName');
 
 document.addEventListener('DOMContentLoaded', () => {
-    const perfilActivo = localStorage.getItem('perfilActivo');
-    const reportesDiv = document.getElementById('reportes-list');
-    let reportes = JSON.parse(localStorage.getItem('reportes')) || [];
+  const perfilActivo = localStorage.getItem('perfilActivo');
+  const reportesDiv = document.getElementById('reportes-list');
+  let reportes = JSON.parse(localStorage.getItem('reportes')) || [];
 
-    reportes = reportes.filter(reporte => reporte.perfil === perfilActivo);
+  reportes = reportes.filter(reporte => reporte.perfil === perfilActivo);
 
-    reportes.forEach(reporte => {
-        const nuevoReporte = document.createElement('tr');
-        const usuarioActivo = `${loggedInUser}.${perfilActivo}`;
-        nuevoReporte.innerHTML = `
-            <td>${reporte.id}</td>
-            <td>${usuarioActivo}</td>
-            <td>${reporte.tipo}</td>
-            <td>${reporte.mensaje}</td>
-            <td>${reporte.fecha}</td>
-        `;
-        reportesDiv.appendChild(nuevoReporte);
-    });
+  const perfilNames = {};
+  const profilesData = JSON.parse(localStorage.getItem('profilesData'));
+  profilesData.forEach(profile => {
+    perfilNames[profile.sessionId] = profile.name;
+  });
+
+  reportes.forEach(reporte => {
+    const perfilName = perfilNames[reporte.perfil];
+    const nuevoReporte = document.createElement('tr');
+    const usuarioActivo = `${loggedInUser} - ${perfilName}`;
+    nuevoReporte.innerHTML = `
+      <td>${reporte.id}</td>
+      <td>${usuarioActivo}</td>
+      <td>${reporte.tipo}</td>
+      <td>${reporte.mensaje}</td>
+      <td>${reporte.fecha}</td>
+    `;
+    reportesDiv.appendChild(nuevoReporte);
+  });
 });
 
 
