@@ -12,11 +12,6 @@ El link para poder utilizar la página es
 
 https://fabianandresp.github.io/closet.com/
 
-Una vez dentro deberá crear un usuario y una contraseña 
-(mínimo 8 caracteres, letras mayúsculas y caracteres especiales).
-Seguidamente deberá crear un perfil o cuantos deseé
-utilizar y comenzar a utilizar todas las funcionalidades de la página.
-
-
-![dMhRKdv.md.png](https://iili.io/dMhRKdv.md.png)
+Una vez dentro deberá crear un usuario y una contraseña (mínimo 8 caracteres, letras mayúsculas y caracteres especiales).
+Seguidamente deberá crear un perfil o cuantos deseé utilizar y comenzar a utilizar todas las funcionalidades de la página.
 
