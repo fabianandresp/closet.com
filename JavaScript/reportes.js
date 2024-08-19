@@ -26,11 +26,11 @@ let isVisibleInicio = false;
 document.querySelector("[boton-inicio]").addEventListener("click", e => {
   if (!isVisibleInicio) {
     document.querySelector("[boton-inicio]").classList.add("menu-botones-medio-onclick");
-    agregarReporte(loggedInUser + ' cambio de pestaña a inicio', 'Cambio de pestaña');
+    agregarReporte('Cambio de pestaña a inicio', 'Cambio de pestaña');
     location.href = "/home.html";
   } else {
     document.querySelector("[boton-inicio]").classList.add("menu-botones-medio");
-    agregarReporte(loggedInUser + ' cambio de pestaña a inicio', 'Cambio de pestaña');
+    agregarReporte('Cambio de pestaña a inicio', 'Cambio de pestaña');
     location.href = "/home.html";
   }
 });

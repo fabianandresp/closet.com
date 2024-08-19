@@ -371,7 +371,7 @@ function displayClothingItems(listaPrendas) {
             temporada: document.getElementById("temporada").value || prendaTemporada,
             tipoRopaId: document.getElementById("tipo").value || prendaTipo,
             usuarioId: 1,
-            favoritos: prendaFavoritos // Mantener el estado de favoritos original
+            favoritos: prendaFavoritos, // Mantener el estado de favoritos original
           };
           
 
@@ -416,7 +416,7 @@ function displayClothingItems(listaPrendas) {
             temporada: document.getElementById("temporada").value || prendaTemporada,
             tipoRopaId: document.getElementById("tipo").value || prendaTipo,
             usuarioId: 1,
-            favoritos: fav // Mantener el estado de favoritos original
+            favoritos: fav, // Mantener el estado de favoritos original
           };
 
           if (container) {
@@ -509,7 +509,8 @@ function displayClothingItems(listaPrendas) {
         temporada: document.getElementById("temporada").value,
         tipoRopaId: document.getElementById("tipo").value,
         usuarioId: 1,
-        favoritos: 0
+        favoritos: 0,
+        usos: 0
       };
 
       addTo(formData);
@@ -544,12 +545,12 @@ document.querySelector("[boton-inicio]").addEventListener("click", e => {
   if (document.querySelector("[boton-inicio]").classList.contains("menu-botones-medio-onclick")) {
 
     document.querySelector("[boton-inicio]").classList.remove("menu-botones-medio-onclick");
-    agregarReporte(loggedInUser + ' cambio de pestaña a inicio', 'Cambio de pestaña');
+    agregarReporte('Cambio de pestaña a inicio', 'Cambio de pestaña');
     location.href = "./home.html";
 
   } else {
     document.querySelector("[boton-inicio]").classList.add("menu-botones-medio-onclick");
-    agregarReporte(loggedInUser + ' cambio de pestaña a inicio', 'Cambio de pestaña');
+    agregarReporte('Cambio de pestaña a inicio', 'Cambio de pestaña');
     location.href = "./home.html";
   }
 })
@@ -565,12 +566,12 @@ document.querySelector("[boton-reportes]").addEventListener("click", e => {
   if (!isVisibleReportes) {
     isVisibleReportes = true;
     document.querySelector("[boton-reportes]").classList.add("menu-botones-medio-onclick");
-    agregarReporte(loggedInUser + ' cambio de pestaña a reportes', 'Cambio de pestaña');
+    agregarReporte('Cambio de pestaña a reportes', 'Cambio de pestaña');
     location.href = "./homeReportes.html";
   } else {
     isVisibleReportes = false;
     document.querySelector("[boton-reportes]").classList.add("menu-botones-medio");
-    agregarReporte(loggedInUser + ' ambio de pestaña a reportes', 'Cambio de pestaña');
+    agregarReporte('Cambio de pestaña a reportes', 'Cambio de pestaña');
     location.href = "./homeReportes.html";
   }
 })
